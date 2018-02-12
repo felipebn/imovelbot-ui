@@ -3,47 +3,34 @@ import React, { Component } from 'react';
 
 class RealEstatePanel extends Component {
   render() {
+    if(this.props.post == null) return null;
+    var post = this.props.post
     return (
-      <div className="card">
-        {this.renderCardImage()}
-        {this.renderCardContent()}
-      </div>
-    );
-  }
-
-  renderCardImage() {
-    return(
-      <div className="card-image">
-        <figure className="image is-4by3">
-          <img src={this.props.mainPhotoUrl} alt="House"/>
-        </figure>
-      </div>
-    );
-  }
-
-  renderCardContent(){
-    return(
-      <div className="card-content">
-        <div className="media">
-          <div className="media-content">
-            <p className="title is-5">{this.props.title}</p>
+      <section className="hero is-dark is-fullheight" style={{alignItems: 'start'}}>
+        <div className="hero-body" style={{paddingTop:'10px'}}>
+          <div>
+            <div className="columns">
+              <div className="column">
+                <h1 className="title">
+                  {post.title}
+                </h1>
+                <p>
+                  {post.description} (Show more...)
+                </p>
+              </div>
+              <div className="column is-two-thirds">
+                <img src={post.mainPhotoUrl} alt="House"/>
+              </div>
+            </div>
           </div>
-          <div className="media-right">
-            <p className="title is-4">{this.props.price} &euro;</p>
+          <div>
+           (Pic carrousel here....)
           </div>
         </div>
-
-        <div className="content">
-          <p className="is-size-7">
-            {this.props.description}
-          </p>
-          <time className="is-size-7" datetime="2016-1-1">
-            {this.props.lastUpdated}
-          </time>
-        </div>
-      </div>
+      </section>
     );
   }
+
 }
 
 export default RealEstatePanel;

@@ -37,7 +37,7 @@ class RealEstateCard extends Component {
           <p className="is-size-7">
             {this.props.description}
           </p>
-          <time className="is-size-7" datetime="2016-1-1">
+          <time className="is-size-7" dateTime="2016-1-1">
             {this.props.lastUpdated}
           </time>
         </div>
