@@ -25,7 +25,10 @@ class App extends Component {
   componentDidMount() {
     new ListingApi()
       .fetchPosts()
-      .then(posts => this.setState({posts, loadingProgress: 100}))
+      .then(result => {
+        console.log("loaded", result.realEstateProperties) 
+        this.setState({posts: result.realEstateProperties, loadingProgress: 100})
+      })
 
   }
 }
