@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 //import './RealStateCard.css';
 
-class RealStateCard extends Component {
+class RealEstateCard extends Component {
   render() {
     return (
       <div className="card">
@@ -46,4 +46,4 @@ class RealStateCard extends Component {
   }
 }
 
-export default RealStateCard;
+export default RealEstateCard;

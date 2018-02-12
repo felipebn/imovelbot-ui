@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import RealStateCard from './RealStateCard.js';
+import RealEstateCard from './RealEstateCard.js';
 //import './Listing.css';
 
 class Listing extends Component {
@@ -14,12 +14,12 @@ class Listing extends Component {
 
   renderColumn(post){
     return (<div className="column is-one-quarter-desktop is-half-tablet">
-      <RealStateCard 
+      <RealEstateCard 
         title={post.title}
         price={post.price}
         description={post.description}
         mainPhotoUrl={post.mainPhotoUrl}
-        lastUpdated={post.lastUpdate}/>
+        lastUpdated={post.lastUpdated}/>
     </div>);
   }
 }
