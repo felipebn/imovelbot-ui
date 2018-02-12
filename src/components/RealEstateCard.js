@@ -15,10 +15,14 @@ class RealEstateCard extends Component {
     return(
       <div className="card-image">
         <figure className="image is-4by3">
-          <img src={this.props.mainPhotoUrl} alt="House"/>
+          <img src={this.getMainPhotoUrl()} alt="House"/>
         </figure>
       </div>
     );
+  }
+
+  getMainPhotoUrl(){
+    return this.props.mainPhotoUrl ? this.props.mainPhotoUrl : '/img/property.jpg'
   }
 
   renderCardContent(){
