@@ -27,13 +27,11 @@ class RealEstateCard extends Component {
 
   renderCardContent(){
     return(
-      <div className="card-content">
+      <div className="card-content" style={{padding:"0.75rem"}}>
         <div className="media">
           <div className="media-content">
-            <p className="title is-5">{this.props.title}</p>
-          </div>
-          <div className="media-right">
-            <p className="title is-4">{this.props.price} &euro;</p>
+            <p className="title is-5" style={{float:"right", margin:"0px"}}>{this.props.price} &euro;</p>
+            <p className="title is-5 has-text-weight-light" style={{marginTop:"0px"}}>{this.props.title}</p>
           </div>
         </div>
 
