@@ -9,10 +9,10 @@ class Listing extends Component {
     var columns = this.props.posts.map(post => this.renderColumn(post))
     return (
       <div>
+        <RealEstatePanel post={this.props.posts[0]}/>
         <div className="columns is-multiline">
           {columns}
         </div>
-        <RealEstatePanel post={this.props.posts[0]}/>
       </div>
     );
   }

@@ -1,0 +1,18 @@
+div.realEstatePanel-container{
+    width: 100%;
+    margin: auto;
+    padding: 24px;
+}
+
+img.realEstatePanel-thumbnail{
+    display: inline-block;
+    height: 128px;
+    width: 128px;
+    object-fit: cover;
+}
+
+div.realEstatePanel-carousel-arrows{
+    padding-top: 39.5px;
+    color: #F44336;
+}
+
