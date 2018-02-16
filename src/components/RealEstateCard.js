@@ -37,7 +37,7 @@ class RealEstateCard extends Component {
 
         <div className="content">
           <p className="is-size-7">
-            {this.props.description}
+            {this.getEllipziedDescription()}
           </p>
           <time className="is-size-7" dateTime="2016-1-1">
             {this.props.lastUpdated}
@@ -45,6 +45,19 @@ class RealEstateCard extends Component {
         </div>
       </div>
     );
+  }
+
+  getEllipziedDescription(){
+    let length = 150;
+    //200 - 150 = 50
+    //150 - 150 = 0
+    //150 - 140 = -10
+    let delta = this.props.description.length - length; 
+    if(delta > 3){
+      return this.props.description.substring(0, length) + "..."; 
+    }else{
+      return this.props.description;
+    }
   }
 }
 

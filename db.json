@@ -2,7 +2,7 @@
   "realEstate": {
     "realEstateProperties": [
       {
-        "title":"T2 na Estrela com terraço e muita luz que nem precisa comprar lampadas para usar a noite",
+        "title":"T2 na Estrela com terraço e muita luz",
         "price":"900",
         "description":"Property description limited to 250 characters so we can have an idea of what is written without including the full description. The 250 limit should be enougn to see some text here with lots of information.",
         "mainPhotoUrl":"https://images.unsplash.com/photo-1492889971304-ac16ab4a4a5a?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=058c56771e5c8d1f9adf38dc794f6e0e&auto=format&fit=crop&w=1353&q=80",
@@ -14,9 +14,9 @@
         ]
       },
       {
-        "title":"T2 na Estrela com terraço e muita luz que nem precisa comprar lampadas para usar a noite",
+        "title":"A smaller title",
         "price":"900",
-        "description":"Property description limited to 250 characters so we can have an idea of what is written without including the full description. The 250 limit should be enougn to see some text here with lots of information.",
+        "description":"A really short description!",
         "mainPhotoUrl":"https://images.unsplash.com/photo-1481934633871-fc3e3ba6f0e0?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=c212bfd1cceb73041f42daa963b79185&auto=format&fit=crop&w=1350&q=80",
         "lastUpdated":"11:09 PM - 1 Jan 2016",
         "photos":[
@@ -29,7 +29,7 @@
         ]
       },
       {
-        "title":"T2 na Estrela com terraço e muita luz que nem precisa comprar lampadas para usar a noite",
+        "title":"Outro t3",
         "price":"900",
         "description":"Property description limited to 250 characters so we can have an idea of what is written without including the full description. The 250 limit should be enougn to see some text here with lots of information.",
         "mainPhotoUrl":"https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=e5993d35ab22807452b753ac66005f9b&auto=format&fit=crop&w=1350&q=80",
@@ -39,15 +39,35 @@
           "https://images.unsplash.com/photo-1512918580421-b2feee3b85a6?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=fc17cfe4b7cce4e0a629c0b26d81ea75&auto=format&fit=crop&w=1350&q=80"
         ]
       },
-    {
-      "title":"T2 na Estrela com terraço e muita luz que nem precisa comprar lampadas para usar a noite",
-      "price":"900",
-      "description":"Property description limited to 250 characters so we can have an idea of what is written without including the full description. The 250 limit should be enougn to see some text here with lots of information.",
-      "mainPhotoUrl":"https://images.unsplash.com/photo-1509732499382-20be2145852e?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=91f8e2073867d0f4328db958b686d54c&auto=format&fit=crop&w=2134&q=80",
-      "lastUpdated":"11:09 PM - 1 Jan 2016",
-      "photos":[
+      {
+        "title":"Apto sensacional para voce e sua familia",
+        "price":"900",
+        "description":"Property description limited to 250 characters so we can have an idea of what is written without including the full description. The 250 limit should be enougn to see some text here with lots of information.",
+        "mainPhotoUrl":"https://images.unsplash.com/photo-1509732499382-20be2145852e?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=91f8e2073867d0f4328db958b686d54c&auto=format&fit=crop&w=2134&q=80",
+        "lastUpdated":"11:09 PM - 1 Jan 2016",
+        "photos":[
 
-      ]
-    }
+        ]
+      },
+      {
+        "title":"T2 na Estrela com terraço e muita luz que nem precisa comprar lampadas para usar a noite",
+        "price":"900",
+        "description":"Property description limited to 250 characters so we can have an idea of what is written without including the full description. The 250 limit should be enougn to see some text here with lots of information.",
+        "mainPhotoUrl":"https://images.unsplash.com/photo-1509732499382-20be2145852e?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=91f8e2073867d0f4328db958b686d54c&auto=format&fit=crop&w=2134&q=80",
+        "lastUpdated":"11:09 PM - 1 Jan 2016",
+        "photos":[
+
+        ]
+      },
+      {
+        "title":"T2 na Estrela com terraço e muita luz que nem precisa comprar lampadas para usar a noite",
+        "price":"900",
+        "description":"Property description limited to 250 characters so we can have an idea of what is written without including the full description. The 250 limit should be enougn to see some text here with lots of information.",
+        "mainPhotoUrl":"https://images.unsplash.com/photo-1509732499382-20be2145852e?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=91f8e2073867d0f4328db958b686d54c&auto=format&fit=crop&w=2134&q=80",
+        "lastUpdated":"11:09 PM - 1 Jan 2016",
+        "photos":[
+
+        ]
+      }
   ]}
 }
