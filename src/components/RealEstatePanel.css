@@ -4,11 +4,18 @@ div.realEstatePanel-container{
     padding: 24px;
 }
 
-img.realEstatePanel-thumbnail{
+div.realEstatePanel-thumbnail{
+    margin:12px;
+    min-width: 128px;
+    display: inline-block;
+}
+
+div.realEstatePanel-thumbnail img{
     display: inline-block;
     height: 128px;
     width: 128px;
     object-fit: cover;
+    cursor: pointer;
 }
 
 div.realEstatePanel-carousel-arrows{

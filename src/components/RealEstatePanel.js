@@ -2,14 +2,22 @@ import React, { Component } from 'react';
 import './RealEstatePanel.css';
 
 class RealEstatePanel extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      currentPhotoUrl: null,
+      carouselOffset: 0
+    }
+  }
+
   render() {
     if(this.props.post == null) return null;
     var post = this.props.post
     return (
-      <section className="hero is-dark is-fullheight" style={{alignItems: 'start'}}>
-        <div className="hero-body" style={{paddingTop:'10px'}}>          
+      <section className="hero is-dark is-fullheight" style={{alignItems: 'start', maxHeight:'100vh'}}>
+        <div className="hero-body" style={{paddingTop:'10px', maxWidth:'100%'}}>          
           <div className="realEstatePanel-container">
-            <div className="columns">
+            <div className="columns" style={{maxHeight:'70vh'}}>
               <div className="column">
                 <h1 className="title">
                   {post.title}
@@ -18,8 +26,8 @@ class RealEstatePanel extends Component {
                   {post.description}
                 </p>
               </div>
-              <div className="column is-two-thirds">
-                <img src={post.mainPhotoUrl} alt="House"/>
+              <div className="column is-two-thirds has-text-centered">
+                <img src={this.state.currentPhotoUrl || post.mainPhotoUrl} alt="House" style={{maxHeight:'100%', objectFit:'scale-down'}}/>
               </div>
             </div>
             {this.renderPhotoCarousel(post.photos)}
@@ -51,12 +59,16 @@ class RealEstatePanel extends Component {
 
   renderPhotoThumbnail(photoUrl){
     return(
-      <div className="column has-text-centered" style={{minWidth:"128px"}}>
-        <img className="test" src={photoUrl} className="realEstatePanel-thumbnail"/>
+      <div className="realEstatePanel-thumbnail has-text-centered" style={{minWidth:"128px"}}>
+        <img src={photoUrl} onClick={() => this.changePhoto(photoUrl)}/>
       </div>
     )
   }
 
+  changePhoto(photoUrl){
+    console.log("lets change to", photoUrl)
+    this.setState({currentPhotoUrl: photoUrl})
+  }
 }
 
 export default RealEstatePanel;
