@@ -38,22 +38,15 @@ class RealEstatePanel extends Component {
   }
 
   renderPhotoCarousel(photos){
-    var thumbnails = (photos || []).map(url => this.renderPhotoThumbnail(url))
-    var leftPx = (-1 * this.state.carouselOffset) + 'px'
-    //TODO disable arrows and add message indicating that there are no pics
     return (
       <div className="columns">
         {this.renderLeftArrow()}
-        <div className="column is-10 is-clipped realEstatePanel-thumbnails-container">
-          <div className="columns" style={{left:leftPx}}>
-            {thumbnails}
-          </div>
-        </div>
+        {this.renderThumbnails(photos)}
         {this.renderRightArrow()}
       </div>
     )
   }
-
+  
   renderLeftArrow(){
     var disabledClass = this.state.carouselOffset == 0 ? ' disabled ' : ''
     return (
@@ -62,7 +55,7 @@ class RealEstatePanel extends Component {
       </div>
     )
   }
-
+  
   renderRightArrow(){
     var disabledClass = this.state.carouselOffset == (this.props.post.photos.length * 138) ? ' disabled ' : ''
     return (
@@ -71,7 +64,23 @@ class RealEstatePanel extends Component {
       </div>
     )
   }
+  
+  renderThumbnails(photos){
+    var thumbnails = (photos || []).map(url => this.renderPhotoThumbnail(url))
+    var leftPx = (-1 * this.state.carouselOffset) + 'px'
+    if(photos.length == 0)
+      return (<div className="column is-10 has-text-centered is-size-7 realEstatePanel-thumbnails-empty"><p>This listing does not have more photos.</p></div>)
 
+    return (
+      <div className="column is-10 is-clipped realEstatePanel-thumbnails-container">
+        <div className="columns" style={{left:leftPx}}>
+          {thumbnails}
+        </div>
+      </div>
+    )
+    
+  }
+  
   renderPhotoThumbnail(photoUrl){
     return(
       <div className="realEstatePanel-thumbnail has-text-centered" style={{minWidth:"128px"}}>

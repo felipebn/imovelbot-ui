@@ -36,4 +36,15 @@ div.realEstatePanel-carousel-arrows{
 
 div.realEstatePanel-carousel-arrows.disabled{
     color: lightslategray;
+    cursor: not-allowed;
+}
+
+div.realEstatePanel-thumbnails-empty{
+    display:flex;
+    align-items: center;
+}
+
+div.realEstatePanel-thumbnails-empty p{
+    width: 100%;
+    color:darkgray;
 }
