@@ -4,6 +4,16 @@ div.realEstatePanel-container{
     padding: 24px;
 }
 
+div.realEstatePanel-thumbnails-container{
+    position: relative;
+}
+
+div.realEstatePanel-thumbnails-container > div.columns{
+    position: absolute;
+    transition: 500ms;
+    left:0px;
+}
+
 div.realEstatePanel-thumbnail{
     margin:12px;
     min-width: 128px;
@@ -21,5 +31,9 @@ div.realEstatePanel-thumbnail img{
 div.realEstatePanel-carousel-arrows{
     padding-top: 39.5px;
     color: #F44336;
+    cursor: pointer;
 }
 
+div.realEstatePanel-carousel-arrows.disabled{
+    color: lightslategray;
+}

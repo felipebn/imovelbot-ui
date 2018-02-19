@@ -39,20 +39,35 @@ class RealEstatePanel extends Component {
 
   renderPhotoCarousel(photos){
     var thumbnails = (photos || []).map(url => this.renderPhotoThumbnail(url))
+    var leftPx = (-1 * this.state.carouselOffset) + 'px'
     //TODO disable arrows and add message indicating that there are no pics
     return (
       <div className="columns">
-        <div className="column is-1 realEstatePanel-carousel-arrows">
-          <i className="fa fa-angle-left fa-5x"></i>
-        </div>
-        <div className="column is-10 is-clipped">
-          <div className="columns">
+        {this.renderLeftArrow()}
+        <div className="column is-10 is-clipped realEstatePanel-thumbnails-container">
+          <div className="columns" style={{left:leftPx}}>
             {thumbnails}
           </div>
         </div>
-        <div className="column is-1 realEstatePanel-carousel-arrows">
-          <i className="fa fa-angle-right fa-5x is-pulled-right"></i>
-        </div>
+        {this.renderRightArrow()}
+      </div>
+    )
+  }
+
+  renderLeftArrow(){
+    var disabledClass = this.state.carouselOffset == 0 ? ' disabled ' : ''
+    return (
+      <div className={"column is-1 realEstatePanel-carousel-arrows" + disabledClass}>
+        <i className="fa fa-angle-left fa-5x" onClick={() => this.slideLeft()}></i>
+      </div>
+    )
+  }
+
+  renderRightArrow(){
+    var disabledClass = this.state.carouselOffset == (this.props.post.photos.length * 138) ? ' disabled ' : ''
+    return (
+      <div className={"column is-1 realEstatePanel-carousel-arrows" + disabledClass}>
+        <i className="fa fa-angle-right fa-5x" onClick={() => this.slideRight()}></i>
       </div>
     )
   }
@@ -68,6 +83,15 @@ class RealEstatePanel extends Component {
   changePhoto(photoUrl){
     console.log("lets change to", photoUrl)
     this.setState({currentPhotoUrl: photoUrl})
+  }
+
+  slideLeft(){
+    this.setState(oldState => ({carouselOffset: Math.max(oldState.carouselOffset - 138, 0)}))
+  }
+
+  slideRight(){
+    //TODO some improvements: we could better calculatewhen to stop (i.e. not wait until the last photo be on zero)
+    this.setState(oldState => ({carouselOffset: Math.min(oldState.carouselOffset + 138, this.props.post.photos.length * 138)}))
   }
 }
 
