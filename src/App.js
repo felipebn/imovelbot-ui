@@ -3,7 +3,9 @@ import './App.css';
 import Progress from 'react-progress';
 import Listing from './components/Listing.js';
 import ListingApi from './services/ListingApi.js';
-
+import RealEstateCard from './components/RealEstateCard';
+import RealEstatePanel from './components/RealEstatePanel';
+import { Switch, Route } from 'react-router-dom'
 
 class App extends Component {
   constructor(props){
@@ -17,7 +19,11 @@ class App extends Component {
     return (
       <div className="App">
         <Progress percent={this.state.loadingProgress} height="4"/>
-        <Listing posts={this.state.posts}/>
+        <Switch>
+          <Route exact path='/' render={(props) => <Listing posts={this.state.posts}/>}/>
+          <Route path='/realEstate/:id' render={(props) => <RealEstatePanel post={this.state.posts[props.match.params.id]}/>}/>
+        </Switch>
+        
       </div>
     );
   }

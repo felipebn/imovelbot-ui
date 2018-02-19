@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import RealEstateCard from './RealEstateCard.js';
-import RealEstatePanel from './RealEstatePanel.js';
 
 //import './Listing.css';
 
@@ -9,7 +8,6 @@ class Listing extends Component {
     var columns = this.props.posts.map(post => this.renderColumn(post))
     return (
       <div>
-        <RealEstatePanel post={this.props.posts[3]}/>
         <div className="columns is-multiline">
           {columns}
         </div>
