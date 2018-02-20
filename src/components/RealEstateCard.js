@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-//import './RealStateCard.css';
+import './RealEstateCard.css';
 
 class RealEstateCard extends Component {
   render() {
@@ -15,7 +15,7 @@ class RealEstateCard extends Component {
     return(
       <div className="card-image">
         <figure className="image is-4by3">
-          <img src={this.getMainPhotoUrl()} alt="House"/>
+          <img className="realEstateCard-thumbnail" src={this.getMainPhotoUrl()} alt="House"/>
         </figure>
       </div>
     );

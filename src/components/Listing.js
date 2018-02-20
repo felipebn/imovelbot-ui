@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import RealEstateCard from './RealEstateCard.js';
-
 //import './Listing.css';
 
 class Listing extends Component {
