@@ -2,6 +2,7 @@
   "realEstate": {
     "realEstateProperties": [
       {
+        "id":0,
         "title":"T2 na Estrela com terraço e muita luz",
         "price":"900",
         "description":"Property description limited to 250 characters so we can have an idea of what is written without including the full description. The 250 limit should be enougn to see some text here with lots of information.",
@@ -22,6 +23,7 @@
         ]
       },
       {
+        "id":1,
         "title":"A smaller title",
         "price":"900",
         "description":"A really short description!",
@@ -37,6 +39,7 @@
         ]
       },
       {
+        "id":2,
         "title":"Outro t3",
         "price":"900",
         "description":"Property description limited to 250 characters so we can have an idea of what is written without including the full description. The 250 limit should be enougn to see some text here with lots of information.",
@@ -48,6 +51,7 @@
         ]
       },
       {
+        "id":3,
         "title":"Apto sensacional para voce e sua familia",
         "price":"900",
         "description":"Property description limited to 250 characters so we can have an idea of what is written without including the full description. The 250 limit should be enougn to see some text here with lots of information.",
@@ -58,6 +62,7 @@
         ]
       },
       {
+        "id":4,
         "title":"T2 na Estrela com terraço e muita luz que nem precisa comprar lampadas para usar a noite",
         "price":"900",
         "description":"Property description limited to 250 characters so we can have an idea of what is written without including the full description. The 250 limit should be enougn to see some text here with lots of information.",
@@ -68,6 +73,7 @@
         ]
       },
       {
+        "id":5,
         "title":"T2 na Estrela com terraço e muita luz que nem precisa comprar lampadas para usar a noite",
         "price":"900",
         "description":"Property description limited to 250 characters so we can have an idea of what is written without including the full description. The 250 limit should be enougn to see some text here with lots of information.",

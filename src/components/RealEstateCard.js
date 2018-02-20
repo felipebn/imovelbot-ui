@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 import './RealEstateCard.css';
 
 class RealEstateCard extends Component {
@@ -15,7 +16,9 @@ class RealEstateCard extends Component {
     return(
       <div className="card-image">
         <figure className="image is-4by3">
-          <img className="realEstateCard-thumbnail" src={this.getMainPhotoUrl()} alt="House"/>
+          <Link to={"/realEstate/" + this.props.postId}>
+            <img className="realEstateCard-thumbnail" src={this.getMainPhotoUrl()} alt="House"/>
+          </Link>
         </figure>
       </div>
     );
@@ -59,6 +62,7 @@ class RealEstateCard extends Component {
       return this.props.description;
     }
   }
+
 }
 
 export default RealEstateCard;

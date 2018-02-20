@@ -21,7 +21,8 @@ class Listing extends Component {
         price={post.price}
         description={post.description}
         mainPhotoUrl={post.mainPhotoUrl}
-        lastUpdated={post.lastUpdated}/>
+        lastUpdated={post.lastUpdated}
+        postId={post.id}/>
     </div>);
   }
 }
