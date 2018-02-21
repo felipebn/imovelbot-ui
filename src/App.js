@@ -35,7 +35,6 @@ class App extends Component {
         console.log("loaded", result.realEstateProperties) 
         this.setState({posts: result.realEstateProperties, loadingProgress: 100})
       })
-
   }
 }
 

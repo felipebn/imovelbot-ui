@@ -1,18 +1,37 @@
 import React, { Component } from 'react';
+import ListingApi from '../services/ListingApi.js';
 import './RealEstatePanel.css';
 
 class RealEstatePanel extends Component {
   constructor(props){
     super(props)
     this.state = {
+      post: null,
       currentPhotoUrl: null,
       carouselOffset: 0
     }
   }
 
+  componentWillReceiveProps(newProps){
+    if(newProps.post){
+      this.setState({post: newProps.post})
+    }else{
+      new ListingApi()
+      .fetchById(newProps.params.id)
+      .then(result => {
+        console.log("loaded property", result) 
+        this.setState({post: result})
+      })
+    }
+  }
+
+  getPost(){
+    return this.state.post
+  }
+
   render() {
-    if(this.props.post == null) return null;
-    var post = this.props.post
+    var post = this.getPost()
+    if(post == null) return null;
     return (
       <section className="hero is-dark is-fullheight" style={{alignItems: 'start', maxHeight:'100vh'}}>
         <div className="hero-body" style={{paddingTop:'10px', maxWidth:'100%'}}>          
@@ -57,7 +76,7 @@ class RealEstatePanel extends Component {
   }
   
   renderRightArrow(){
-    var disabledClass = this.state.carouselOffset == (this.props.post.photos.length * 138) ? ' disabled ' : ''
+    var disabledClass = this.state.carouselOffset == (this.getPost().photos.length * 138) ? ' disabled ' : ''
     return (
       <div className={"column is-1 realEstatePanel-carousel-arrows" + disabledClass}>
         <i className="fa fa-angle-right fa-5x" onClick={() => this.slideRight()}></i>
@@ -100,7 +119,7 @@ class RealEstatePanel extends Component {
 
   slideRight(){
     //TODO some improvements: we could better calculatewhen to stop (i.e. not wait until the last photo be on zero)
-    this.setState(oldState => ({carouselOffset: Math.min(oldState.carouselOffset + 138, this.props.post.photos.length * 138)}))
+    this.setState(oldState => ({carouselOffset: Math.min(oldState.carouselOffset + 138, this.getPost().photos.length * 138)}))
   }
 }
 
