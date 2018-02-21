@@ -1,0 +1,4 @@
+{
+  "/realEstate": "/db",
+  "/realEstateProperty/:id": "/realEstateProperties/:id"
+}
