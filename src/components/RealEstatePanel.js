@@ -7,22 +7,19 @@ class RealEstatePanel extends Component {
     super(props)
     this.state = {
       post: null,
+      postId: null,
       currentPhotoUrl: null,
       carouselOffset: 0
     }
   }
 
-  componentWillReceiveProps(newProps){
-    if(newProps.post){
-      this.setState({post: newProps.post})
-    }else{
-      new ListingApi()
-      .fetchById(newProps.params.id)
+  componentDidMount(){
+    new ListingApi()
+      .fetchById(this.props.postId)
       .then(result => {
         console.log("loaded property", result) 
         this.setState({post: result})
       })
-    }
   }
 
   getPost(){

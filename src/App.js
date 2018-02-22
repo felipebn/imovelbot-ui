@@ -21,7 +21,7 @@ class App extends Component {
         <Progress percent={this.state.loadingProgress} height="4"/>
         <Switch>
           <Route exact path='/' render={(props) => <Listing posts={this.state.posts}/>}/>
-          <Route path='/realEstate/:id' render={(props) => <RealEstatePanel post={this.state.posts[props.match.params.id]}/>}/>
+          <Route path='/realEstate/:id' render={(props) => <RealEstatePanel postId={props.match.params.id}/>}/>
         </Switch>
         
       </div>
