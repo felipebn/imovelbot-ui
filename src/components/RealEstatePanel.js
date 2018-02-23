@@ -14,12 +14,15 @@ class RealEstatePanel extends Component {
   }
 
   componentDidMount(){
+    //Load data
     new ListingApi()
       .fetchById(this.props.postId)
       .then(result => {
         console.log("loaded property", result) 
         this.setState({post: result})
       })
+    //Clip body: see this for improvement: https://jaketrent.com/post/update-body-class-react/
+    document.body.classList.add("is-clipped")
   }
 
   getPost(){

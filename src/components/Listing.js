@@ -3,6 +3,12 @@ import RealEstateCard from './RealEstateCard.js';
 import './Listing.css';
 
 class Listing extends Component {
+
+  componentDidMount(){
+    //Unclip body
+    document.body.classList.remove("is-clipped")
+  }
+
   render() {
     var columns = this.props.posts.map(post => this.renderColumn(post))
     return (
