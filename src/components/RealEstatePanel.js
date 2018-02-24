@@ -21,6 +21,7 @@ class RealEstatePanel extends Component {
       .then(result => {
         console.log("loaded property", result) 
         this.setState({post: result})
+        document.title = result.title
       })
     //Clip body: see this for improvement: https://jaketrent.com/post/update-body-class-react/
     document.body.classList.add("is-clipped")

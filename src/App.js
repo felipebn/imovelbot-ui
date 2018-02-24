@@ -20,10 +20,9 @@ class App extends Component {
       <div className="App">
         <Progress percent={this.state.loadingProgress} height="4"/>
         <Switch>
-          <Route exact path='/' render={(props) => <Listing posts={this.state.posts}/>}/>
-          <Route path='/realEstate/:id' render={(props) => <RealEstatePanel postId={props.match.params.id}/>}/>
+          <Route exact path='/' render={(props) => this.renderWithTitle("Property Listing", <Listing posts={this.state.posts}/>)}/>
+          <Route path='/realEstate/:id' render={(props) => this.renderWithTitle("",<RealEstatePanel postId={props.match.params.id}/>)}/>
         </Switch>
-        
       </div>
     );
   }
@@ -35,6 +34,11 @@ class App extends Component {
         console.log("loaded", result.realEstateProperties) 
         this.setState({posts: result.realEstateProperties, loadingProgress: 100})
       })
+  }
+
+  renderWithTitle(title, component){
+    document.title = title;
+    return component;
   }
 }
 
