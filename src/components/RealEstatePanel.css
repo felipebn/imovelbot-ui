@@ -4,6 +4,14 @@ div.realEstatePanel-container{
     padding: 24px;
 }
 
+div.realEstatePanel-container .title{
+    font-size: 1.75rem;
+}
+
+a.realEstatePanel-backlink{
+    margin-left:-30px;
+}
+
 div.realEstatePanel-thumbnails-container{
     position: relative;
 }

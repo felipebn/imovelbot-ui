@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 import ListingApi from '../services/ListingApi.js';
 import './RealEstatePanel.css';
 
@@ -38,14 +39,15 @@ class RealEstatePanel extends Component {
           <div className="realEstatePanel-container">
             <div className="columns" style={{maxHeight:'70vh'}}>
               <div className="column">
-                <h1 className="title">
+                <h3 className="title">
+                  <Link to="/" className="realEstatePanel-backlink"><i className="fa fa-angle-double-left fa-1x"></i></Link>
                   {post.title}
-                </h1>
+                </h3>
                 <p>
                   {post.description}
                 </p>
               </div>
-              <div className="column is-two-thirds has-text-centered">
+              <div className="column is-three-fifths has-text-centered">
                 <img src={this.state.currentPhotoUrl || post.mainPhotoUrl} alt="House" style={{maxHeight:'100%', objectFit:'scale-down'}}/>
               </div>
             </div>
