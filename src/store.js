@@ -1,42 +1,81 @@
 import {  
-    applyMiddleware,
     combineReducers,
-    createStore,
 } from 'redux'
-import ListingApi from './services/ListingApi.js';
 
-const initialState = {
-    loading: false,
-    currentPost: null,
-    posts: []
+export function fetchRealEstateListing(){
+    return (dispatch) => {
+        var url = "http://localhost:8080/realEstate?page=0"
+        dispatch(doSetLoadingProgress(0))
+        fetch(url)
+            .then(response => response.json())
+            .then(result => {
+                console.log("Loaded listing", result.realEstateProperties) 
+                dispatch(doSetRealEstatePosts(result.realEstateProperties))
+                dispatch(doSetLoadingProgress(100))
+            })
+    }
 }
 
-function newState(previous, changes){
-    return Object.assign({}, state, changes)
+export function fetchRealEstatePost(postId){
+    return (dispatch) => {
+        var url = "http://localhost:8080/realEstateProperty/" + id
+        dispatch(doSetLoadingProgress(0))
+        fetch(url)
+            .then(response => response.json())
+            .then(post => {
+                console.log("Loaded post", post) 
+                dispatch(doSetCurrentPost(post))
+                dispatch(doSetLoadingProgress(100))
+            })
+    }
 }
 
-const FETCH_REALESTATE_LISTING = 'FETCH_REALESTATE_LISTING';
-export const doFetchRealEstateListing = (fetch = true) => {
-    type: FETCH_REALESTATE_LISTING,
-    fetch
+const SET_POSTS = 'SET_POSTS'
+function doSetRealEstatePosts(posts){
+    return {
+        type: SET_POSTS,
+        posts
+    };
 }
 
-const FETCH_REALESTATE_POST = 'FETCH_REALESTATE_POST';
-export const doFetchRealEstatePost = postId => {
-    type: FETCH_REALESTATE_POST,
-    postId
+const SET_CURRENT_POST = 'SET_CURRENT_POST'
+function doSetCurrentPost(post){
+    return {
+        type: SET_CURRENT_POST,
+        post
+    };
+}
+const SET_LOADING_PROGRESS = 'SET_LOADING_PROGRESS'
+function doSetLoadingProgress(progress){
+    return {
+        type: SET_LOADING_PROGRESS,
+        progress
+    };
 }
 
-const reducers = {
-    FETCH_REALESTATE_LISTING: (previousState, action) => {
-        if(action.fetch){
-            return newState(previousState, {loading: true, posts: []})
-        }else{
-            return newState(previousState, {loading: false, posts: action.posts})
+//----REDUCERS-----------------------------------------------------------------------
+
+const RealEstateReducers = {
+    loadingProgress:function(state = 0, action){
+        if(action == SET_LOADING_PROGRESS){
+            return action.posts
         }
+        return state
     },
-    FETCH_REALESTATE_POST: (previousState, action) => {
 
+    posts: function(state = [], action){
+        if(action == SET_POSTS){
+            return action.posts
+        }
+        return state
     },
-};
 
+    currentPost: function(state = null, action){
+        if(action == SET_CURRENT_POST){
+            return action.post
+        }
+        return state
+    },
+}
+
+export const reducers = combineReducers(RealEstateReducers);
