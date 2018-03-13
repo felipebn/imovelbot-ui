@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 import ListingApi from '../services/ListingApi.js';
 import './RealEstatePanel.css';
 
@@ -7,22 +8,23 @@ class RealEstatePanel extends Component {
     super(props)
     this.state = {
       post: null,
+      postId: null,
       currentPhotoUrl: null,
       carouselOffset: 0
     }
   }
 
-  componentWillReceiveProps(newProps){
-    if(newProps.post){
-      this.setState({post: newProps.post})
-    }else{
-      new ListingApi()
-      .fetchById(newProps.params.id)
+  componentDidMount(){
+    //Load data
+    new ListingApi()
+      .fetchById(this.props.postId)
       .then(result => {
         console.log("loaded property", result) 
         this.setState({post: result})
+        document.title = result.title
       })
-    }
+    //Clip body: see this for improvement: https://jaketrent.com/post/update-body-class-react/
+    document.body.classList.add("is-clipped")
   }
 
   getPost(){
@@ -38,14 +40,15 @@ class RealEstatePanel extends Component {
           <div className="realEstatePanel-container">
             <div className="columns" style={{maxHeight:'70vh'}}>
               <div className="column">
-                <h1 className="title">
+                <h3 className="title">
+                  <Link to="/" className="realEstatePanel-backlink"><i className="fa fa-angle-double-left fa-1x"></i></Link>
                   {post.title}
-                </h1>
+                </h3>
                 <p>
                   {post.description}
                 </p>
               </div>
-              <div className="column is-two-thirds has-text-centered">
+              <div className="column is-three-fifths has-text-centered">
                 <img src={this.state.currentPhotoUrl || post.mainPhotoUrl} alt="House" style={{maxHeight:'100%', objectFit:'scale-down'}}/>
               </div>
             </div>

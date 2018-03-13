@@ -1,4 +1,4 @@
 {
-  "/realEstate": "/db",
-  "/realEstateProperty/:id": "/realEstateProperties/:id"
+  "/realEstateProperty/:id": "/realEstateProperties/:id",
+  "/realEstate?*": "/db"
 }

@@ -9,12 +9,14 @@
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.0"
   },
+  "config":{
+    "demoAPIPort": "8080"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "startapi": "json-server --watch db.json --port 8080 --routes routes.json",
-    "startapi9090": "json-server --watch db.json --port 9090 --routes routes.json"
+    "startapi": "json-server --watch db.json --port $npm_package_config_demoAPIPort --routes routes.json"
   }
 }
