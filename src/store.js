@@ -21,19 +21,22 @@ export const doFetchRealEstateListing = (fetch = true) => {
     fetch
 }
 
-export const reduceListing = (previousState = initialState, action) => {
-    if(action.type !== FETCH_REALESTATE_LISTING) return previousState
-    if(action.fetch){
-        return newState(previousState, {loading: true, posts: []})
-    }else{
-        return newState(previousState, {loading: false, posts: action.posts})
-    }
-    return state
-}
-
 const FETCH_REALESTATE_POST = 'FETCH_REALESTATE_POST';
 export const doFetchRealEstatePost = postId => {
     type: FETCH_REALESTATE_POST,
     postId
 }
+
+const reducers = {
+    FETCH_REALESTATE_LISTING: (previousState, action) => {
+        if(action.fetch){
+            return newState(previousState, {loading: true, posts: []})
+        }else{
+            return newState(previousState, {loading: false, posts: action.posts})
+        }
+    },
+    FETCH_REALESTATE_POST: (previousState, action) => {
+
+    },
+};
 
