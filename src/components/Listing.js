@@ -10,7 +10,7 @@ class Listing extends Component {
   }
 
   render() {
-    var columns = this.props.posts.map(post => this.renderColumn(post))
+    var columns = (this.props.posts || []).map(post => this.renderColumn(post))
     return (
       <div class="listing-container">
         <div className="columns is-multiline">

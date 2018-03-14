@@ -18,7 +18,7 @@ export function fetchRealEstateListing(){
 
 export function fetchRealEstatePost(postId){
     return (dispatch) => {
-        var url = "http://localhost:8080/realEstateProperty/" + id
+        var url = "http://localhost:8080/realEstateProperty/" + postId
         dispatch(doSetLoadingProgress(0))
         fetch(url)
             .then(response => response.json())
@@ -32,6 +32,7 @@ export function fetchRealEstatePost(postId){
 
 const SET_POSTS = 'SET_POSTS'
 function doSetRealEstatePosts(posts){
+    console.log("doSetRealEstatePosts", posts)
     return {
         type: SET_POSTS,
         posts
@@ -57,21 +58,22 @@ function doSetLoadingProgress(progress){
 
 const RealEstateReducers = {
     loadingProgress:function(state = 0, action){
-        if(action == SET_LOADING_PROGRESS){
-            return action.posts
+        if(action.type == SET_LOADING_PROGRESS){
+            return action.progress
         }
         return state
     },
 
     posts: function(state = [], action){
-        if(action == SET_POSTS){
+        console.log("RealEstateReducers.posts", action)
+        if(action.type == SET_POSTS){
             return action.posts
         }
         return state
     },
 
     currentPost: function(state = null, action){
-        if(action == SET_CURRENT_POST){
+        if(action.type == SET_CURRENT_POST){
             return action.post
         }
         return state

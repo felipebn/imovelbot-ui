@@ -2,25 +2,19 @@ import React, { Component } from 'react';
 import './App.css';
 import Progress from 'react-progress';
 import Listing from './components/Listing.js';
-import ListingApi from './services/ListingApi.js';
 import RealEstateCard from './components/RealEstateCard';
 import RealEstatePanel from './components/RealEstatePanel';
 import { Switch, Route } from 'react-router-dom'
+import { connect } from 'react-redux';
+import { fetchRealEstateListing } from './store';
 
 class App extends Component {
-  constructor(props){
-    super(props)
-    this.state =  {
-      posts: [],
-      loadingProgress: 50
-    }
-  }
   render() {
     return (
       <div className="App">
-        <Progress percent={this.state.loadingProgress} height="4"/>
+        <Progress percent={this.props.loadingProgress} height="4"/>
         <Switch>
-          <Route exact path='/' render={(props) => this.renderWithTitle("Property Listing", <Listing posts={this.state.posts}/>)}/>
+          <Route exact path='/' render={(props) => this.renderWithTitle("Property Listing", <Listing posts={this.props.posts}/>)}/>
           <Route path='/realEstate/:id' render={(props) => this.renderWithTitle("",<RealEstatePanel postId={props.match.params.id}/>)}/>
         </Switch>
       </div>
@@ -28,12 +22,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    new ListingApi()
-      .fetchPosts()
-      .then(result => {
-        console.log("loaded", result.realEstateProperties) 
-        this.setState({posts: result.realEstateProperties, loadingProgress: 100})
-      })
+    this.props.fetchListing();
   }
 
   renderWithTitle(title, component){
@@ -42,4 +31,18 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  console.log("Mapping state to props", state)
+  return {
+    loadingProgress: state.loadingProgress,
+    posts: state.posts
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchListing: () => dispatch(fetchRealEstateListing())
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
