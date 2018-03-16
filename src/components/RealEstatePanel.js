@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { fetchRealEstatePost } from '../store';
+import { fetchRealEstateListing } from '../store';
 import './RealEstatePanel.css';
 
 class RealEstatePanel extends Component {
@@ -11,12 +12,20 @@ class RealEstatePanel extends Component {
       currentPhotoUrl: null,
       carouselOffset: 0
     }
+    this.handleBackToList = this.handleBackToList.bind(this);
   }
 
   componentDidMount(){
-    this.props.fetchRealEstatePost(this.props.postId);
+    if(this.props.post == null)
+      this.props.fetchRealEstatePost(this.props.postId);
     //Clip body: see this for improvement: https://jaketrent.com/post/update-body-class-react/
     document.body.classList.add("is-clipped")
+  }
+
+  componentWillReceiveProps(){
+    console.log("componentWillReceiveProps", this.props.post)
+    if(this.props.post)
+      document.title = this.props.post.title;
   }
 
   getPost(){
@@ -33,7 +42,7 @@ class RealEstatePanel extends Component {
             <div className="columns" style={{maxHeight:'70vh'}}>
               <div className="column">
                 <h3 className="title">
-                  <Link to="/" className="realEstatePanel-backlink"><i className="fa fa-angle-double-left fa-1x"></i></Link>
+                  <Link to="/" onClick={this.handleBackToList} className="realEstatePanel-backlink"><i className="fa fa-angle-double-left fa-1x"></i></Link>
                   {post.title}
                 </h3>
                 <p>
@@ -49,6 +58,10 @@ class RealEstatePanel extends Component {
         </div>
       </section>
     );
+  }
+
+  handleBackToList(){
+    this.props.fetchRealEstateListing();
   }
 
   renderPhotoCarousel(photos){
@@ -97,7 +110,7 @@ class RealEstatePanel extends Component {
   
   renderPhotoThumbnail(photoUrl){
     return(
-      <div className="realEstatePanel-thumbnail has-text-centered" style={{minWidth:"128px"}}>
+      <div className="realEstatePanel-thumbnail has-text-centered" style={{minWidth:"128px"}} key={photoUrl}>
         <img src={photoUrl} onClick={() => this.changePhoto(photoUrl)}/>
       </div>
     )
@@ -118,8 +131,9 @@ class RealEstatePanel extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   console.log("Mapping state to RealEstatePanel.props", state)
+  console.log("RealEstatePanel.props ownProps", ownProps)
   return {
     post: state.currentPost,
   };
@@ -127,7 +141,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchRealEstatePost: (postId) => dispatch(fetchRealEstatePost(postId))
+    fetchRealEstateListing: () => dispatch(fetchRealEstateListing()),
+    fetchRealEstatePost: (postId) => dispatch(fetchRealEstatePost(postId)),
   };
 };
 

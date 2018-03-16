@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux';
+import { fetchRealEstatePost } from '../store';
 import './RealEstateCard.css';
 
 class RealEstateCard extends Component {
+  constructor(props){
+    super(props);
+    this.handleOpenPost = this.handleOpenPost.bind(this);
+  }
   render() {
     return (
       <div className="card">
@@ -16,12 +22,16 @@ class RealEstateCard extends Component {
     return(
       <div className="card-image">
         <figure className="image is-4by3">
-          <Link to={"/realEstate/" + this.props.postId}>
+          <Link to={"/realEstate/" + this.props.postId} onClick={this.handleOpenPost}>
             <img className="realEstateCard-thumbnail" src={this.getMainPhotoUrl()} alt="House"/>
           </Link>
         </figure>
       </div>
     );
+  }
+
+  handleOpenPost(){
+    this.props.fetchRealEstatePost(this.props.postId);
   }
 
   getMainPhotoUrl(){
@@ -65,4 +75,14 @@ class RealEstateCard extends Component {
 
 }
 
-export default RealEstateCard;
+const mapStateToProps = (state, ownProps) => {
+  return ownProps;
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchRealEstatePost: (postId) => dispatch(fetchRealEstatePost(postId))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(RealEstateCard);

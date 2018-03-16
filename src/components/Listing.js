@@ -24,7 +24,7 @@ class Listing extends Component {
   }
 
   renderColumn(post){
-    return (<div className="column is-one-quarter-desktop is-half-tablet">
+    return (<div className="column is-one-quarter-desktop is-half-tablet" key={post.id}>
       <RealEstateCard 
         title={post.title}
         price={post.price}
