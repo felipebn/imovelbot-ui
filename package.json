@@ -20,6 +20,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "startapi": "json-server --watch db.json --port 8080 --routes routes.json"
+    "startapi": "json-server --watch db.json --port 9090 --routes routes.json"
   }
 }

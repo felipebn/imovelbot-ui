@@ -2,9 +2,11 @@ import {
     combineReducers,
 } from 'redux'
 
+const API_URL = 'http://localhost:9090'
+
 export function fetchRealEstateListing(){
     return (dispatch) => {
-        var url = "http://localhost:8080/realEstate?page=0"
+        var url = `${API_URL}/realEstate?page=0`
         dispatch(doSetLoadingProgress(0))
         fetch(url)
             .then(response => response.json())
@@ -18,7 +20,7 @@ export function fetchRealEstateListing(){
 
 export function fetchRealEstatePost(postId){
     return (dispatch) => {
-        var url = "http://localhost:8080/realEstateProperty/" + postId
+        var url = `${API_URL}/realEstateProperty/${postId}`
         dispatch(doSetLoadingProgress(0))
         fetch(url)
             .then(response => response.json())

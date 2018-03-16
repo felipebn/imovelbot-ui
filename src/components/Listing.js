@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchRealEstateListing } from '../store';
 import RealEstateCard from './RealEstateCard.js';
 import './Listing.css';
 
 class Listing extends Component {
 
   componentDidMount(){
+    this.props.fetchListing();
     //Unclip body
     document.body.classList.remove("is-clipped")
   }
@@ -33,4 +36,17 @@ class Listing extends Component {
   }
 }
 
-export default Listing;
+const mapStateToProps = (state) => {
+  console.log("Mapping state to Listing.props", state)
+  return {
+    posts: state.posts,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchListing: () => dispatch(fetchRealEstateListing())
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Listing);

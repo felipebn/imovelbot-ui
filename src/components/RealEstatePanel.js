@@ -1,34 +1,26 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-import ListingApi from '../services/ListingApi.js';
+import { connect } from 'react-redux';
+import { fetchRealEstatePost } from '../store';
 import './RealEstatePanel.css';
 
 class RealEstatePanel extends Component {
   constructor(props){
     super(props)
     this.state = {
-      post: null,
-      postId: null,
       currentPhotoUrl: null,
       carouselOffset: 0
     }
   }
 
   componentDidMount(){
-    //Load data
-    new ListingApi()
-      .fetchById(this.props.postId)
-      .then(result => {
-        console.log("loaded property", result) 
-        this.setState({post: result})
-        document.title = result.title
-      })
+    this.props.fetchRealEstatePost(this.props.postId);
     //Clip body: see this for improvement: https://jaketrent.com/post/update-body-class-react/
     document.body.classList.add("is-clipped")
   }
 
   getPost(){
-    return this.state.post
+    return this.props.post
   }
 
   render() {
@@ -126,4 +118,17 @@ class RealEstatePanel extends Component {
   }
 }
 
-export default RealEstatePanel;
+const mapStateToProps = (state) => {
+  console.log("Mapping state to RealEstatePanel.props", state)
+  return {
+    post: state.currentPost,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchRealEstatePost: (postId) => dispatch(fetchRealEstatePost(postId))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(RealEstatePanel);

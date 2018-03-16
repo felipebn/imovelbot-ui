@@ -6,7 +6,6 @@ import RealEstateCard from './components/RealEstateCard';
 import RealEstatePanel from './components/RealEstatePanel';
 import { Switch, Route } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { fetchRealEstateListing } from './store';
 
 class App extends Component {
   render() {
@@ -14,15 +13,11 @@ class App extends Component {
       <div className="App">
         <Progress percent={this.props.loadingProgress} height="4"/>
         <Switch>
-          <Route exact path='/' render={(props) => this.renderWithTitle("Property Listing", <Listing posts={this.props.posts}/>)}/>
+          <Route exact path='/' render={(props) => this.renderWithTitle("Property Listing", <Listing/>)}/>
           <Route path='/realEstate/:id' render={(props) => this.renderWithTitle("",<RealEstatePanel postId={props.match.params.id}/>)}/>
         </Switch>
       </div>
     );
-  }
-
-  componentDidMount() {
-    this.props.fetchListing();
   }
 
   renderWithTitle(title, component){
@@ -32,16 +27,15 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log("Mapping state to props", state)
+  console.log("Mapping state to App.props", state)
   return {
     loadingProgress: state.loadingProgress,
-    posts: state.posts
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchListing: () => dispatch(fetchRealEstateListing())
+    
   };
 };
 
