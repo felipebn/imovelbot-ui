@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { fetchRealEstatePost } from '../store';
+import { fetchRealEstateListing, fetchRealEstatePost } from '../store';
 import './RealEstatePanel.css';
 
 class RealEstatePanel extends Component {
@@ -11,10 +11,12 @@ class RealEstatePanel extends Component {
       currentPhotoUrl: null,
       carouselOffset: 0
     }
+    this.handleBackToListingClick = this.handleBackToListingClick.bind(this);
   }
 
   componentDidMount(){
-    this.props.fetchRealEstatePost(this.props.postId);
+    if(this.props.post == null)
+      this.props.fetchRealEstatePost(this.props.postId);
     //Clip body: see this for improvement: https://jaketrent.com/post/update-body-class-react/
     document.body.classList.add("is-clipped")
   }
@@ -33,7 +35,7 @@ class RealEstatePanel extends Component {
             <div className="columns" style={{maxHeight:'70vh'}}>
               <div className="column">
                 <h3 className="title">
-                  <Link to="/" className="realEstatePanel-backlink"><i className="fa fa-angle-double-left fa-1x"></i></Link>
+                  <Link to="/" onClick={this.handleBackToListingClick} className="realEstatePanel-backlink"><i className="fa fa-angle-double-left fa-1x"></i></Link>
                   {post.title}
                 </h3>
                 <p>
@@ -49,6 +51,10 @@ class RealEstatePanel extends Component {
         </div>
       </section>
     );
+  }
+
+  handleBackToListingClick(){
+    this.props.fetchRealEstateListing();
   }
 
   renderPhotoCarousel(photos){
@@ -127,7 +133,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchRealEstatePost: (postId) => dispatch(fetchRealEstatePost(postId))
+    fetchRealEstatePost: (postId) => dispatch(fetchRealEstatePost(postId)),
+    fetchRealEstateListing: () => dispatch(fetchRealEstateListing())
   };
 };
 
