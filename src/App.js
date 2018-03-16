@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import Progress from 'react-progress';
-import Listing from './components/Listing.js';
-import RealEstateCard from './components/RealEstateCard';
+import Navbar from './components/base/Navbar';
+import Listing from './components/Listing';
 import RealEstatePanel from './components/RealEstatePanel';
 import { Switch, Route } from 'react-router-dom'
 import { connect } from 'react-redux';
@@ -11,6 +11,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Navbar/>
         <Progress percent={this.props.loadingProgress} height="4"/>
         <Switch>
           <Route exact path='/' render={(props) => this.renderWithTitle("Property Listing", <Listing/>)}/>

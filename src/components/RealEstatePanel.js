@@ -27,7 +27,7 @@ class RealEstatePanel extends Component {
     var post = this.getPost()
     if(post == null) return null;
     return (
-      <section className="hero is-dark is-fullheight" style={{alignItems: 'start', maxHeight:'100vh'}}>
+      <section className="hero is-fullheight" style={{alignItems: 'start', maxHeight:'100vh'}}>
         <div className="hero-body" style={{paddingTop:'10px', maxWidth:'100%'}}>          
           <div className="realEstatePanel-container">
             <div className="columns" style={{maxHeight:'70vh'}}>
