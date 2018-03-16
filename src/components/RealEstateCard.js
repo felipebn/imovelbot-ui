@@ -82,7 +82,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchRealEstatePost: (postId) => dispatch(fetchRealEstatePost(postId))
+    fetchRealEstatePost: (postId) => dispatch(fetchRealEstatePost(postId, true))
   };
 };
 

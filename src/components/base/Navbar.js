@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import './Navbar.css';
 
@@ -12,10 +11,10 @@ class Navbar extends Component {
 
   render() {
       return (
-        <nav className="navbar" role="navigation">
+        <nav className="navbar">
             <div className="navbar-brand">
                 <a className="navbar-item" href="/">
-                    <img src="/img/logo.png" width="29" height="36"/>
+                    <img src="/img/logo.png" width="29" height="36" alt="Movingbot logo"/>
                     movingbot
                 </a>
 

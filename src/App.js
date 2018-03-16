@@ -14,15 +14,15 @@ class App extends Component {
         <Navbar/>
         <Progress percent={this.props.loadingProgress} height="4"/>
         <Switch>
-          <Route exact path='/' render={(props) => this.renderWithTitle("Property Listing", <Listing/>)}/>
-          <Route path='/realEstate/:id' render={(props) => this.renderWithTitle("",<RealEstatePanel postId={props.match.params.id}/>)}/>
+          <Route exact path='/' render={(props) => this.renderWithTitle(<Listing/>)}/>
+          <Route path='/realEstate/:id' render={(props) => this.renderWithTitle(<RealEstatePanel postId={props.match.params.id}/>)}/>
         </Switch>
       </div>
     );
   }
 
-  renderWithTitle(title, component){
-    document.title = title;
+  renderWithTitle(component){
+    document.title = this.props.pageTitle;
     return component;
   }
 }
@@ -31,6 +31,7 @@ const mapStateToProps = (state) => {
   console.log("Mapping state to App.props", state)
   return {
     loadingProgress: state.loadingProgress,
+    pageTitle: state.pageTitle
   };
 };
 
