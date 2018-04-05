@@ -62,7 +62,7 @@ const SET_PAGE_TITLE = 'SET_TITLE'
 export function doSetTitle(titleSuffix){
     return {
         type: SET_PAGE_TITLE,
-        title: `movingbot ^ ${titleSuffix}`
+        title: `movingbot | ${titleSuffix}`
     };
 }
 
