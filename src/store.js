@@ -18,7 +18,7 @@ export function fetchRealEstateListing(){
     }
 }
 
-export function fetchRealEstatePost(postId){
+export function fetchRealEstatePost(postId, updatePageTitle){
     return (dispatch) => {
         var url = `${API_URL}/realEstateProperty/${postId}`
         dispatch(doSetLoadingProgress(0))
@@ -27,6 +27,8 @@ export function fetchRealEstatePost(postId){
             .then(post => {
                 console.log("Loaded post", post) 
                 dispatch(doSetCurrentPost(post))
+                if( updatePageTitle )
+                    dispatch(doSetTitle(post.title))
                 dispatch(doSetLoadingProgress(100))
             })
     }
@@ -56,11 +58,19 @@ function doSetLoadingProgress(progress){
     };
 }
 
+const SET_PAGE_TITLE = 'SET_TITLE'
+export function doSetTitle(titleSuffix){
+    return {
+        type: SET_PAGE_TITLE,
+        title: `movingbot ^ ${titleSuffix}`
+    };
+}
+
 //----REDUCERS-----------------------------------------------------------------------
 
 const RealEstateReducers = {
     loadingProgress:function(state = 0, action){
-        if(action.type == SET_LOADING_PROGRESS){
+        if(action.type === SET_LOADING_PROGRESS){
             return action.progress
         }
         return state
@@ -68,18 +78,25 @@ const RealEstateReducers = {
 
     posts: function(state = [], action){
         console.log("RealEstateReducers.posts", action)
-        if(action.type == SET_POSTS){
+        if(action.type === SET_POSTS){
             return action.posts
         }
         return state
     },
 
     currentPost: function(state = null, action){
-        if(action.type == SET_CURRENT_POST){
+        if(action.type === SET_CURRENT_POST){
             return action.post
         }
         return state
     },
+
+    pageTitle: function(state = "movingbot", action){
+        if(action.type === SET_PAGE_TITLE){
+            return action.title
+        }
+        return state;
+    }
 }
 
 export const reducers = combineReducers(RealEstateReducers);

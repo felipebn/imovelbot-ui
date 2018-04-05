@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { fetchRealEstatePost } from '../store';
-import { fetchRealEstateListing } from '../store';
+import { fetchRealEstateListing, fetchRealEstatePost } from '../store';
 import './RealEstatePanel.css';
 
 class RealEstatePanel extends Component {
@@ -12,12 +11,13 @@ class RealEstatePanel extends Component {
       currentPhotoUrl: null,
       carouselOffset: 0
     }
-    this.handleBackToList = this.handleBackToList.bind(this);
+    this.handleBackToListingClick = this.handleBackToListingClick.bind(this);
   }
 
   componentDidMount(){
-    if(this.props.post == null)
+    if(this.props.post == null){
       this.props.fetchRealEstatePost(this.props.postId);
+    }
     //Clip body: see this for improvement: https://jaketrent.com/post/update-body-class-react/
     document.body.classList.add("is-clipped")
   }
@@ -36,13 +36,13 @@ class RealEstatePanel extends Component {
     var post = this.getPost()
     if(post == null) return null;
     return (
-      <section className="hero is-dark is-fullheight" style={{alignItems: 'start', maxHeight:'100vh'}}>
+      <section className="hero is-fullheight" style={{alignItems: 'start', maxHeight:'100vh'}}>
         <div className="hero-body" style={{paddingTop:'10px', maxWidth:'100%'}}>          
           <div className="realEstatePanel-container">
             <div className="columns" style={{maxHeight:'70vh'}}>
               <div className="column">
                 <h3 className="title">
-                  <Link to="/" onClick={this.handleBackToList} className="realEstatePanel-backlink"><i className="fa fa-angle-double-left fa-1x"></i></Link>
+                  <Link to="/" onClick={this.handleBackToListingClick} className="realEstatePanel-backlink"><i className="fa fa-angle-double-left fa-1x"></i></Link>
                   {post.title}
                 </h3>
                 <p>
@@ -60,7 +60,7 @@ class RealEstatePanel extends Component {
     );
   }
 
-  handleBackToList(){
+  handleBackToListingClick(){
     this.props.fetchRealEstateListing();
   }
 
@@ -75,7 +75,7 @@ class RealEstatePanel extends Component {
   }
   
   renderLeftArrow(){
-    var disabledClass = this.state.carouselOffset == 0 ? ' disabled ' : ''
+    var disabledClass = this.state.carouselOffset === 0 ? ' disabled ' : ''
     return (
       <div className={"column is-1 realEstatePanel-carousel-arrows" + disabledClass}>
         <i className="fa fa-angle-left fa-5x" onClick={() => this.slideLeft()}></i>
@@ -84,7 +84,7 @@ class RealEstatePanel extends Component {
   }
   
   renderRightArrow(){
-    var disabledClass = this.state.carouselOffset == (this.getPost().photos.length * 138) ? ' disabled ' : ''
+    var disabledClass = this.state.carouselOffset === (this.getPost().photos.length * 138) ? ' disabled ' : ''
     return (
       <div className={"column is-1 realEstatePanel-carousel-arrows" + disabledClass}>
         <i className="fa fa-angle-right fa-5x" onClick={() => this.slideRight()}></i>
@@ -95,7 +95,7 @@ class RealEstatePanel extends Component {
   renderThumbnails(photos){
     var thumbnails = (photos || []).map(url => this.renderPhotoThumbnail(url))
     var leftPx = (-1 * this.state.carouselOffset) + 'px'
-    if(photos.length == 0)
+    if(photos.length === 0)
       return (<div className="column is-10 has-text-centered is-size-7 realEstatePanel-thumbnails-empty"><p>This listing does not have more photos.</p></div>)
 
     return (
@@ -111,7 +111,7 @@ class RealEstatePanel extends Component {
   renderPhotoThumbnail(photoUrl){
     return(
       <div className="realEstatePanel-thumbnail has-text-centered" style={{minWidth:"128px"}} key={photoUrl}>
-        <img src={photoUrl} onClick={() => this.changePhoto(photoUrl)}/>
+        <img src={photoUrl} onClick={() => this.changePhoto(photoUrl)} alt={`post extra`}/>
       </div>
     )
   }
@@ -141,8 +141,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    fetchRealEstatePost: (postId) => dispatch(fetchRealEstatePost(postId, true)),
     fetchRealEstateListing: () => dispatch(fetchRealEstateListing()),
-    fetchRealEstatePost: (postId) => dispatch(fetchRealEstatePost(postId)),
   };
 };
 

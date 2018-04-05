@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchRealEstateListing } from '../store';
+import { fetchRealEstateListing, doSetTitle } from '../store';
 import RealEstateCard from './RealEstateCard.js';
 import './Listing.css';
 
@@ -45,7 +45,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchListing: () => dispatch(fetchRealEstateListing())
+    fetchListing: () => {
+      dispatch(fetchRealEstateListing());
+      dispatch(doSetTitle("Listing"));
+    }
   };
 };
 

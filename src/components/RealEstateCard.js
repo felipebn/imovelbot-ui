@@ -7,8 +7,9 @@ import './RealEstateCard.css';
 class RealEstateCard extends Component {
   constructor(props){
     super(props);
-    this.handleOpenPost = this.handleOpenPost.bind(this);
+    this.handlePostClick = this.handlePostClick.bind(this);
   }
+
   render() {
     return (
       <div className="card">
@@ -22,7 +23,7 @@ class RealEstateCard extends Component {
     return(
       <div className="card-image">
         <figure className="image is-4by3">
-          <Link to={"/realEstate/" + this.props.postId} onClick={this.handleOpenPost}>
+          <Link to={"/realEstate/" + this.props.postId} onClick={this.handlePostClick}>
             <img className="realEstateCard-thumbnail" src={this.getMainPhotoUrl()} alt="House"/>
           </Link>
         </figure>
@@ -30,7 +31,7 @@ class RealEstateCard extends Component {
     );
   }
 
-  handleOpenPost(){
+  handlePostClick(){
     this.props.fetchRealEstatePost(this.props.postId);
   }
 
@@ -81,7 +82,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchRealEstatePost: (postId) => dispatch(fetchRealEstatePost(postId))
+    fetchRealEstatePost: (postId) => dispatch(fetchRealEstatePost(postId, true))
   };
 };
 
