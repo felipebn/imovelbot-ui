@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { fetchRealEstateListing, fetchRealEstatePost } from '../store';
+import AttributeTag from './AttributeTag'
 import './RealEstatePanel.css';
 
 class RealEstatePanel extends Component {
@@ -37,14 +38,27 @@ class RealEstatePanel extends Component {
     if(post == null) return null;
     return (
       <section className="hero is-fullheight" style={{alignItems: 'start', maxHeight:'100vh'}}>
-        <div className="hero-body" style={{paddingTop:'10px', maxWidth:'100%'}}>          
+        <div className="hero-body" style={{paddingTop:'10px', width:'100%'}}>          
           <div className="realEstatePanel-container">
-            <div className="columns" style={{maxHeight:'70vh'}}>
+            <div className="columns" style={{height:'70vh'}}>
               <div className="column">
-                <h3 className="title">
-                  <Link to="/" onClick={this.handleBackToListingClick} className="realEstatePanel-backlink"><i className="fa fa-angle-double-left fa-1x"></i></Link>
-                  {post.title}
-                </h3>
+                <div className="columns">
+                  <div className="column">
+                    <h3 className="title">
+                      <Link to="/" onClick={this.handleBackToListingClick} className="realEstatePanel-backlink"><i className="fa fa-angle-double-left fa-1x"></i></Link>
+                      {post.title}
+                    </h3>
+                  </div>
+                  <div className="column is-one-quarter has-text-right is-size-3">
+                    <h3>{post.price} &euro;</h3>
+                  </div>
+                </div>
+                <div className="field is-grouped is-grouped-multiline">
+                  <AttributeTag type="Blueprint" infos="T2"/>
+                  <AttributeTag type="Bathrooms" infos="2"/>
+                  <AttributeTag type="Sq meters" infos="68"/>
+                  <AttributeTag type="Extras" infos={["Garden", "Terrace", "BBQ"]}/>
+                </div>
                 <p>
                   {post.description}
                 </p>
