@@ -54,10 +54,7 @@ class RealEstatePanel extends Component {
                   </div>
                 </div>
                 <div className="field is-grouped is-grouped-multiline">
-                  <AttributeTag type="Blueprint" infos="T2"/>
-                  <AttributeTag type="Bathrooms" infos="2"/>
-                  <AttributeTag type="Sq meters" infos="68"/>
-                  <AttributeTag type="Extras" infos={["Garden", "Terrace", "BBQ"]}/>
+                {this.renderAttributeTags()}
                 </div>
                 <p>
                   {post.description}
@@ -76,6 +73,15 @@ class RealEstatePanel extends Component {
 
   handleBackToListingClick(){
     this.props.fetchRealEstateListing();
+  }
+
+  renderAttributeTags(){
+    var expectedAttributes = [
+      "type", "size", "bathrooms", "furnished"
+    ];
+    return expectedAttributes
+      .filter(prop => this.getPost()[prop] != null)
+      .map(prop => (<AttributeTag type={prop} infos={this.getPost()[prop]}/>))
   }
 
   renderPhotoCarousel(photos){

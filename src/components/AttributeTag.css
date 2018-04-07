@@ -1,0 +1,8 @@
+div.attributeTag span.tag.type img{
+    width: 18px;
+    filter: invert(100%);
+}
+
+div.attributeTag span.tag.value img{
+    width: 18px;
+}

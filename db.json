@@ -19,7 +19,10 @@
         "https://images.unsplash.com/photo-1482867899247-e295efdd8c1a?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=bf8093060b47c356f015d0735ff5d962&auto=format&fit=crop&w=1350&q=80",
         "https://images.unsplash.com/photo-1504479519050-de194bc81ba6?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=ba156fe7a0947ecce18034c076d9c45d&auto=format&fit=crop&w=634&q=80",
         "https://images.unsplash.com/photo-1512918580421-b2feee3b85a6?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=fc17cfe4b7cce4e0a629c0b26d81ea75&auto=format&fit=crop&w=1350&q=80"
-      ]
+      ],
+      "type": "T2",
+      "size": "80 m²",
+      "bathrooms": "2"
     },
     {
       "id":1,
@@ -35,7 +38,11 @@
         "https://images.unsplash.com/photo-1480434935263-07efee66f5b7?ixlib=rb-0.3.5&s=966f440b8aa598324babd142525aaccc&auto=format&fit=crop&w=1350&q=80",
         "https://images.unsplash.com/photo-1515231073646-9eb684da63d9?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=45e55cedf41574f983403bf77903f581&auto=format&fit=crop&w=1350&q=80",
         "https://images.unsplash.com/photo-1482867899247-e295efdd8c1a?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=bf8093060b47c356f015d0735ff5d962&auto=format&fit=crop&w=1350&q=80"
-      ]
+      ],
+      "type": "T2+1",
+      "size": "50 m²",
+      "bathrooms": "1",
+      "furnished": "true"
     },
     {
       "id":2,
@@ -47,7 +54,10 @@
       "photos":[
         "https://images.unsplash.com/photo-1504479519050-de194bc81ba6?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=ba156fe7a0947ecce18034c076d9c45d&auto=format&fit=crop&w=634&q=80",
         "https://images.unsplash.com/photo-1512918580421-b2feee3b85a6?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=fc17cfe4b7cce4e0a629c0b26d81ea75&auto=format&fit=crop&w=1350&q=80"
-      ]
+      ],
+      "type": "T3",
+      "size": "100 m²",
+      "bathrooms": "3"
     },
     {
       "id":3,
@@ -58,7 +68,10 @@
       "lastUpdated":"11:09 PM - 1 Jan 2016",
       "photos":[
 
-      ]
+      ],
+      "type": "T4",
+      "size": "150 m²",
+      "bathrooms": "3"
     },
     {
       "id":4,
@@ -69,7 +82,11 @@
       "lastUpdated":"11:09 PM - 1 Jan 2016",
       "photos":[
 
-      ]
+      ],
+      "type": "T2",
+      "size": "65 m²",
+      "bathrooms": "1",
+      "furnished": "true"
     },
     {
       "id":5,
@@ -80,7 +97,11 @@
       "lastUpdated":"11:09 PM - 1 Jan 2016",
       "photos":[
 
-      ]
+      ],
+      "type": "T2",
+      "size": "75 m²",
+      "bathrooms": "2",
+      "furnished": "false"
     }
   ]
 }
