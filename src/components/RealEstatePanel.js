@@ -25,7 +25,6 @@ class RealEstatePanel extends Component {
   }
 
   componentWillReceiveProps(){
-    console.log("componentWillReceiveProps", this.props.post)
     if(this.props.post)
       document.title = this.props.post.title;
   }
@@ -38,7 +37,7 @@ class RealEstatePanel extends Component {
     var post = this.getPost()
     if(post == null) return null;
     return (
-      <section className="hero is-fullheight" style={{alignItems: 'start', maxHeight:'100vh'}}>
+      <section className="hero is-fullheight realEstatePanel-section">
         <div className="hero-body" style={{paddingTop:'10px', width:'100%'}}>          
           <div className="realEstatePanel-container">
             <div className="columns" style={{height:'70vh'}}>

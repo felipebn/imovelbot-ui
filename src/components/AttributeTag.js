@@ -8,7 +8,9 @@ class AttributeTag extends Component {
       return (
         <div className="control attributeTag">
             <div className="tags has-addons">
-            <span className="tag type is-dark"><img src={this.getIconUrl(this.props.type)} alt={this.props.type} title={this.props.type}/></span>
+            <span className="tag type is-dark">
+              <img src={this.getIconUrl(this.props.type)} alt={this.props.type} title={this.props.type}/>
+            </span>
             {infoTags}
             </div>
         </div>
@@ -16,7 +18,7 @@ class AttributeTag extends Component {
   }
 
   renderTagValue(text){
-    return text === "true" || text === "false" ? (<img src={this.getIconUrl(text)}/>) : text;
+    return text === "true" || text === "false" ? (<img src={this.getIconUrl(text)} alt={text}/>) : text;
   }
 
   getIconUrl(label){
