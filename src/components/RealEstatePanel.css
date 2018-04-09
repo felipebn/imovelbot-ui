@@ -10,49 +10,6 @@ div.realEstatePanel-container .title{
 
 a.realEstatePanel-backlink{
     margin-left:-30px;
+    color: #3423A6;
 }
 
-div.realEstatePanel-thumbnails-container{
-    position: relative;
-}
-
-div.realEstatePanel-thumbnails-container > div.columns{
-    position: absolute;
-    transition: 500ms;
-    left:0px;
-}
-
-div.realEstatePanel-thumbnail{
-    margin:12px;
-    min-width: 128px;
-    display: inline-block;
-}
-
-div.realEstatePanel-thumbnail img{
-    display: inline-block;
-    height: 128px;
-    width: 128px;
-    object-fit: cover;
-    cursor: pointer;
-}
-
-div.realEstatePanel-carousel-arrows{
-    padding-top: 39.5px;
-    color: #F44336;
-    cursor: pointer;
-}
-
-div.realEstatePanel-carousel-arrows.disabled{
-    color: lightslategray;
-    cursor: not-allowed;
-}
-
-div.realEstatePanel-thumbnails-empty{
-    display:flex;
-    align-items: center;
-}
-
-div.realEstatePanel-thumbnails-empty p{
-    width: 100%;
-    color:darkgray;
-}

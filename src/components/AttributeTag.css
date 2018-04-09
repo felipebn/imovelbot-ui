@@ -3,6 +3,11 @@ div.attributeTag span.tag.type img{
     filter: invert(100%);
 }
 
+div.attributeTag span.tag.value{
+    background-color: #3423A6;
+    color: #fff;
+}
+
 div.attributeTag span.tag.value img{
     width: 18px;
 }

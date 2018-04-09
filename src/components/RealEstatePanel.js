@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { fetchRealEstateListing, fetchRealEstatePost } from '../store';
 import AttributeTag from './AttributeTag'
+import RealEstatePhotoCarousel from './RealEstatePhotoCarousel'
 import './RealEstatePanel.css';
 
 class RealEstatePanel extends Component {
@@ -10,9 +11,9 @@ class RealEstatePanel extends Component {
     super(props)
     this.state = {
       currentPhotoUrl: null,
-      carouselOffset: 0
     }
     this.handleBackToListingClick = this.handleBackToListingClick.bind(this);
+    this.handleChangePhoto = this.handleChangePhoto.bind(this);
   }
 
   componentDidMount(){
@@ -64,7 +65,7 @@ class RealEstatePanel extends Component {
                 <img src={this.state.currentPhotoUrl || post.mainPhotoUrl} alt="House" style={{maxHeight:'100%', objectFit:'scale-down'}}/>
               </div>
             </div>
-            {this.renderPhotoCarousel(post.photos)}
+            <RealEstatePhotoCarousel photos={post.photos} onThumbnailClick={this.handleChangePhoto}/>
           </div>
         </div>
       </section>
@@ -84,74 +85,9 @@ class RealEstatePanel extends Component {
       .map(prop => (<AttributeTag type={prop} infos={this.getPost()[prop]}/>))
   }
 
-  renderPhotoCarousel(photos){
-    return (
-      <div className="columns">
-        {this.renderLeftArrow()}
-        {this.renderThumbnails(photos)}
-        {this.renderRightArrow()}
-      </div>
-    )
-  }
-  
-  renderLeftArrow(){
-    var disabledClass = this.state.carouselOffset === 0 ? ' disabled ' : ''
-    return (
-      <div className={"column is-1 realEstatePanel-carousel-arrows" + disabledClass}>
-        <i className="fa fa-angle-left fa-5x" onClick={() => this.slideLeft()}></i>
-      </div>
-    )
-  }
-  
-  renderRightArrow(){
-    var sliderNode = document.querySelector(".realEstatePanel-thumbnails-container .columns");
-    var sliderRightEnding = sliderNode ? sliderNode.clientWidth + this.state.carouselOffset : 0;
-    var arrowNode = document.querySelectorAll(".realEstatePanel-carousel-arrows")[1];
-    var arrowStart = arrowNode ? arrowNode.offsetLeft : 0;
-
-    var disabledClass = sliderRightEnding < arrowStart ? ' disabled ' : ''
-    return (
-      <div className={"column is-1 realEstatePanel-carousel-arrows" + disabledClass}>
-        <i className="fa fa-angle-right fa-5x" onClick={() => this.slideRight()}></i>
-      </div>
-    )
-  }
-  
-  renderThumbnails(photos){
-    var thumbnails = (photos || []).map(url => this.renderPhotoThumbnail(url))
-    var leftPx = (-1 * this.state.carouselOffset) + 'px'
-    if(photos.length === 0)
-      return (<div className="column is-10 has-text-centered is-size-7 realEstatePanel-thumbnails-empty"><p>This listing does not have more photos.</p></div>)
-
-    return (
-      <div className="column is-10 is-clipped realEstatePanel-thumbnails-container">
-        <div className="columns" style={{left:leftPx}}>
-          {thumbnails}
-        </div>
-      </div>
-    )
-    
-  }
-  
-  renderPhotoThumbnail(photoUrl){
-    return(
-      <div className="realEstatePanel-thumbnail has-text-centered" style={{minWidth:"128px"}} key={photoUrl}>
-        <img src={photoUrl} onClick={() => this.changePhoto(photoUrl)} alt={`post extra`}/>
-      </div>
-    )
-  }
-
-  changePhoto(photoUrl){
+  handleChangePhoto(photoUrl){
     console.log("lets change to", photoUrl)
     this.setState({currentPhotoUrl: photoUrl})
-  }
-
-  slideLeft(){
-    this.setState(oldState => ({carouselOffset: Math.max(oldState.carouselOffset - 138, 0)}))
-  }
-
-  slideRight(){
-    this.setState(oldState => ({carouselOffset: Math.min(oldState.carouselOffset + 138, this.getPost().photos.length * 138)}))
   }
 }
 
