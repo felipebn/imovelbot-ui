@@ -104,7 +104,12 @@ class RealEstatePanel extends Component {
   }
   
   renderRightArrow(){
-    var disabledClass = this.state.carouselOffset === (this.getPost().photos.length * 138) ? ' disabled ' : ''
+    var sliderNode = document.querySelector(".realEstatePanel-thumbnails-container .columns");
+    var sliderRightEnding = sliderNode ? sliderNode.clientWidth + this.state.carouselOffset : 0;
+    var arrowNode = document.querySelectorAll(".realEstatePanel-carousel-arrows")[1];
+    var arrowStart = arrowNode ? arrowNode.offsetLeft : 0;
+
+    var disabledClass = sliderRightEnding < arrowStart ? ' disabled ' : ''
     return (
       <div className={"column is-1 realEstatePanel-carousel-arrows" + disabledClass}>
         <i className="fa fa-angle-right fa-5x" onClick={() => this.slideRight()}></i>
@@ -146,7 +151,6 @@ class RealEstatePanel extends Component {
   }
 
   slideRight(){
-    //TODO some improvements: we could better calculatewhen to stop (i.e. not wait until the last photo be on zero)
     this.setState(oldState => ({carouselOffset: Math.min(oldState.carouselOffset + 138, this.getPost().photos.length * 138)}))
   }
 }
