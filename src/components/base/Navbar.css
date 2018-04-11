@@ -1,24 +1,27 @@
 @import url('https://fonts.googleapis.com/css?family=Poiret+One');
 
-.navbar{
+.navbar.mainNavBar{
     background-color: #171738;
     border-bottom: solid 5px #540D6E;
 }
 
-.navbar-brand{
+.navbar.mainNavBar .navbar-brand{
     font-family: 'Poiret One', cursive;
     font-size: 24px;
 }
 
-.navbar-item{
+.navbar.mainNavBar .navbar-item{
     color: white;
 }
 
-a.navbar-item.is-active, a.navbar-item:hover, a.navbar-link.is-active, a.navbar-link:hover{
+.navbar.mainNavBar a.navbar-item.is-active, 
+.navbar.mainNavBar a.navbar-item:hover, 
+.navbar.mainNavBar a.navbar-link.is-active, 
+.navbar.mainNavBar a.navbar-link:hover{
     background-color: #540D6E;
     color: #F0F0F0;
 }
 
-.navbar-item img{
+.navbar.mainNavBar .navbar-item img{
     margin-right: 10px;
 }

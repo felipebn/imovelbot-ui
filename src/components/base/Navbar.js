@@ -11,7 +11,7 @@ class Navbar extends Component {
 
   render() {
       return (
-        <nav className="navbar">
+        <nav className="navbar mainNavBar">
             <div className="navbar-brand">
                 <a className="navbar-item" href="/">
                     <img src="/img/logo.png" width="29" height="36" alt="Movingbot logo"/>

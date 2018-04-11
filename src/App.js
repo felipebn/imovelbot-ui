@@ -4,6 +4,7 @@ import Progress from 'react-progress';
 import Navbar from './components/base/Navbar';
 import Listing from './components/Listing';
 import RealEstatePanel from './components/RealEstatePanel';
+import FilterArea from './components/filterArea/FilterArea';
 import { Switch, Route } from 'react-router-dom'
 import { connect } from 'react-redux';
 
@@ -12,6 +13,7 @@ class App extends Component {
     return (
       <div className="App">
         <Navbar/>
+        <FilterArea/>
         <Progress percent={this.props.loadingProgress} height="4"/>
         <Switch>
           <Route exact path='/' render={(props) => this.renderWithTitle(<Listing/>)}/>

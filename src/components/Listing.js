@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchRealEstateListing, doSetTitle } from '../store';
-import RealEstateCard from './RealEstateCard.js';
+import RealEstateCard from './RealEstateCard';
 import './Listing.css';
 
 class Listing extends Component {
