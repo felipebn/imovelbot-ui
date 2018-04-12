@@ -4,7 +4,7 @@ import './FilterArea.css';
 class FilterArea extends Component {
   render(){
     return (
-      <nav className="navbar filterArea has-shadow" role="navigation" aria-label="main navigation">
+      <nav className="navbar filterArea has-shadow" aria-label="main navigation">
         {this.renderFields()}
       </nav>
     )
@@ -13,27 +13,114 @@ class FilterArea extends Component {
   renderFields(){
     return (
       <div className="navbar-item">
-        <div className="field is-grouped">
-          <p className="control">
-            <a className="button">
-              <span className="icon">
-                <i className="fas fa-twitter" aria-hidden="true"></i>
-              </span>
-              <span>Tweet</span>
-            </a>
-          </p>
-          <p className="control">
-            <a className="button is-primary">
-              <span className="icon">
-                <i className="fas fa-download" aria-hidden="true"></i>
-              </span>
-              <span>Download</span>
-            </a>
-          </p>
+        <div className="field is-horizontal" style={{justifyContent:"center"}}>
+          {this.renderRentOrBuyFilter()}
+          {this.renderLocationFilter()}
+          {this.renderPropertyTypeFilter()}
+          {this.renderPriceRangeFilter()}
+          {this.renderAreaRangeFilter()}
+          {this.renderRoomRangeFilter()}
         </div>
       </div>
     )
   }
+
+  renderRentOrBuyFilter(){
+    return(<div className="field">
+      <div className="control">
+        <div className="select">
+          <select>
+            <option>To buy</option>
+            <option>To rent</option>
+          </select>
+        </div>
+      </div>
+    </div>)
+  }
+
+  renderPropertyTypeFilter(){
+    //TODO should be multiselect and dynamic 
+    return(<div className="field is-horizontal">
+      <div className="control">
+        <div className="select">
+          <select>
+            <option>House</option>
+            <option>Detached House</option>
+            <option>Apartment</option>
+          </select>
+        </div>
+      </div>
+    </div>)
+  }
+
+  renderLocationFilter(){
+    //TODO should be multiselect and dynamic with search
+    return(<div className="field is-horizontal">
+      <div className="control">
+        <div className="select">
+          <select>
+            <option>Lisboa</option>
+            <option>Cascais</option>
+            <option>Oeiras</option>
+            <option>Sintra</option>
+          </select>
+        </div>
+      </div>
+    </div>)
+  }
+
+  renderPriceRangeFilter(){
+    return(<div className="field has-addons compactFilter">
+      <div className="control has-icons-left">
+        <input className="input" type="text" placeholder="Min"/>
+        <span className="icon is-small is-left">
+          <i className="fa fa-eur"></i>
+        </span>
+      </div>
+      <div className="control has-icons-left">
+        <input className="input" type="text" placeholder="Max"/>
+        <span className="icon is-small is-left">
+          <i className="fa fa-eur"></i>
+        </span>
+      </div>
+    </div>)
+  }
+
+  renderAreaRangeFilter(){
+    return(<div className="field has-addons compactFilter">
+      <div className="control has-icons-left">
+        <input className="input" type="text" placeholder="Min"/>
+        <span className="icon is-small is-left">
+          <i className="fa fa-arrows"></i>
+        </span>
+      </div>
+      <div className="control has-icons-left">
+        <input className="input" type="text" placeholder="Max"/>
+        <span className="icon is-small is-left">
+          <i className="fa fa-arrows"></i>
+        </span>
+      </div>
+    </div>)
+  }
+
+  renderRoomRangeFilter(){
+    return(<div className="field has-addons compactFilter">
+      <div className="control has-icons-left">
+        <input className="input" type="text" placeholder="Min"/>
+        <span className="icon is-small is-left">
+          <i className="fa fa-bed"></i>
+        </span>
+      </div>
+      <div className="control has-icons-left">
+        <input className="input" type="text" placeholder="Max"/>
+        <span className="icon is-small is-left">
+          <i className="fa fa-bed"></i>
+        </span>
+      </div>
+    </div>)
+  }
+
+
 }
 
 export default FilterArea;

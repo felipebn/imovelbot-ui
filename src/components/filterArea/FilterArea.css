@@ -1,3 +1,11 @@
 .navbar.filterArea{
 
 }
+
+.navbar.filterArea .field:not(:last-child) {
+    margin-right: 10px;
+}
+
+.navbar.filterArea .compactFilter{
+    flex-basis: 200px;
+}
