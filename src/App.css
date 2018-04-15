@@ -1,0 +1,4 @@
+/*border radius reset*/
+.select select, .input{
+    border-radius: 0px;
+}

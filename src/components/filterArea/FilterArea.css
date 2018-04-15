@@ -9,3 +9,8 @@
 .navbar.filterArea .compactFilter{
     flex-basis: 200px;
 }
+
+.navbar.filterArea .compactFilter i{
+    color: #c448f2;
+}
+

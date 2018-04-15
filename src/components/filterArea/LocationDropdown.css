@@ -1,0 +1,36 @@
+.locationDropdown{
+
+}
+
+.locationDropdown button{
+    border-radius: 0px;
+    margin-right: 10px;
+}
+
+.locationDropdown .dropdown-menu{
+    top: 70%;
+    left: 1px;
+}
+
+.locationDropdown .dropdown-menu:nth-of-type(3){
+    z-index: 15;
+}
+
+.locationDropdown .dropdown-menu:nth-of-type(4){
+    z-index: 10;
+}
+
+.locationDropdown .dropdown-content{
+    border-radius: 0px;
+}
+
+.locationDropdown .dropdown-item span{
+    position: absolute;
+    right: 10px;
+    top: 9px;
+}
+
+.locationDropdown .dropdown-item.selected{
+    background: #540d6e;
+    color:#f0f0f0;
+}

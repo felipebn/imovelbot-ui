@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import LocationDropdown from './LocationDropdown'
 import './FilterArea.css';
 
 class FilterArea extends Component {
@@ -54,19 +55,7 @@ class FilterArea extends Component {
   }
 
   renderLocationFilter(){
-    //TODO should be multiselect and dynamic with search
-    return(<div className="field is-horizontal">
-      <div className="control">
-        <div className="select">
-          <select>
-            <option>Lisboa</option>
-            <option>Cascais</option>
-            <option>Oeiras</option>
-            <option>Sintra</option>
-          </select>
-        </div>
-      </div>
-    </div>)
+    return(<LocationDropdown />)
   }
 
   renderPriceRangeFilter(){
