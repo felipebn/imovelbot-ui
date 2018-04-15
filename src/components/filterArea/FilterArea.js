@@ -21,6 +21,7 @@ class FilterArea extends Component {
           {this.renderPriceRangeFilter()}
           {this.renderAreaRangeFilter()}
           {this.renderRoomRangeFilter()}
+          {this.renderSearchButton()}
         </div>
       </div>
     )
@@ -109,6 +110,16 @@ class FilterArea extends Component {
     </div>)
   }
 
+  renderSearchButton(){
+    return(<div className="field searchButton">      
+      <a class="button">
+        <span class="icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <span>Search</span>
+      </a>
+    </div>)
+  }
 
 }
 
