@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { fetchRealEstatePost } from '../store';
+import { fetchRealEstatePost } from '../state/store';
 import './RealEstateCard.css';
 
 class RealEstateCard extends Component {

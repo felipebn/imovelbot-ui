@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchRealEstateListing, doSetTitle } from '../store';
+import { fetchRealEstateListing, doSetTitle } from '../state/store';
 import RealEstateCard from './RealEstateCard';
 import './Listing.css';
 

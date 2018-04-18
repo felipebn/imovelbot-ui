@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { fetchRealEstateListing, fetchRealEstatePost } from '../store';
+import { fetchRealEstateListing, fetchRealEstatePost } from '../state/store';
 import AttributeTag from './AttributeTag'
 import RealEstatePhotoCarousel from './RealEstatePhotoCarousel'
 import './RealEstatePanel.css';
