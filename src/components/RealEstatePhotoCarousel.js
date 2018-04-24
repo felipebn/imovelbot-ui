@@ -39,7 +39,7 @@ class RealEstatePhotoCarousel extends Component {
   }
   
   renderThumbnails(){
-    if(this.props.photos.length === 0)
+    if(this.props.photos && this.props.photos.length === 0)
       return (<div ref={this.thumbnailsContainerRef} className="column is-10 has-text-centered is-size-7 realEstatePhotoCarousel-thumbnails-empty"><p>This listing does not have more photos.</p></div>)
 
     var thumbnails = (this.props.photos || []).map(url => this.renderPhotoThumbnail(url))

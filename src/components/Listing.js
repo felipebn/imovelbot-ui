@@ -7,7 +7,7 @@ import './Listing.css';
 class Listing extends Component {
 
   componentDidMount(){
-    this.props.fetchListing();
+    
     //Unclip body
     document.body.classList.remove("is-clipped")
   }

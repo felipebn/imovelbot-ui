@@ -44,8 +44,9 @@ export function startSearch(){
 
 export function appendPosts(posts){
     return (dispatch) => {        
-        dispatch(doSetLoadingProgress(100))
+        dispatch(doSetLoadingProgress(50))
         dispatch(doAppendRealEstatePosts(posts))
+        dispatch(doSetLoadingProgress(100))
     }
 }
 
@@ -105,17 +106,8 @@ const RealEstateReducers = {
         if(action.type === SET_POSTS){
             return action.posts
         }
-        return state
-    },
-
-    appendPosts: function(state = [], action){
-        console.log("RealEstateReducers.appendPosts", action)
         if(action.type === APPEND_POSTS){
-            if(state.posts){
-                return state.posts.concat(action.posts)
-            }else{
-                return action.posts
-            }
+            return state.concat(action.posts)
         }
         return state
     },

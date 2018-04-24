@@ -1,71 +1,39 @@
 import SockJS from 'sockjs-client';
+import Stomp from '@stomp/stompjs'
 import nanoid from 'nanoid';
 import { appendPosts } from '../state/store';
 
-const socketUrl = 'http://localhost:18080/echo'
+const socketUrl = 'http://localhost:8080/socket'
 const sockjs = new SockJS(socketUrl);
 const clientId = nanoid()
-//Needs spring
-//const client = Stomp.over(sockjs);
-const client = {
-    messageCallbacks: {},
-
-    send(topic, payload){
-        console.log("Sending: ", topic, payload)
-        var mockMessage = {
-            topic,
-            payload
-        }
-        sockjs.send(JSON.stringify(mockMessage))
-    },
-    subscribe(topic, callback){
-        sockjs.onmessage = function(e) {
-            console.log('message received as setup on listeners', e.data);
-            store.dispatch(appendPosts([]))
-        };
-    }
-}
-
-sockjs.onopen = function() {
-    console.log('sending message');
-    client.send("/onopen", "Testing message")
-};
-
-
+const client = Stomp.over(sockjs);
+client.debug = function(str) {};
 
 export const setupListeners = (store) => {
-    //TODO replace with stomp code!
-    sockjs.onmessage = function(e) {
-        console.log('message received as setup on listeners', e.data);
-        store.dispatch(appendPosts([]))
-    };
-
-    /*Needs the spring server
     client.connect({}, function (frame) {
-        log("Connected to server...")
+        console.log("Websocket connected...")                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+        client.subscribe(`/topic/search/${clientId}`, function (result) {                                                                                                                                                                                                                                                                                                                                                                                                               
+            var posts = JSON.parse(result.body);
+            store.dispatch(appendPosts(posts))
+        });
     });
-    client.subscribe(`/topic/search/${clientId}`, function (result) {
-        console.log("result::", result);
-        log("result::" + result);
-    });
-    */
-
 }
 
 export const socket = {
     startSearch(filters){
         const searchMessage = {
-            clientId
+            clientId,
+            "priceRange": {"min": 100, "max": 1000}                                                             
         }
-        client.send('/ws/search', searchMessage);
+        client.send('/ws/search/start', {}, JSON.stringify(searchMessage));
     },
     pauseSearch(){
-        client.send('/ws/search/pause', {clientId});
+        client.send('/ws/search/pause', {}, JSON.stringify({clientId}));
     },
     resumeSearch(){
-        client.send('/ws/search/resume', {clientId});
+        client.send('/ws/search/resume', {}, JSON.stringify({clientId}));
     },
     cancelSearch(){
-        client.send('/ws/search/cancel', {clientId});
+        client.send('/ws/search/cancel', {}, JSON.stringify({clientId}));
     }
 }
