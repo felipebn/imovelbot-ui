@@ -34,11 +34,35 @@ export function fetchRealEstatePost(postId, updatePageTitle){
     }
 }
 
+export function startSearch(){
+    return (dispatch, getState, {socket}) => {        
+        dispatch(doSetLoadingProgress(0))
+        //TODO setup the filter
+        socket.startSearch({})
+    }
+}
+
+export function appendPosts(posts){
+    return (dispatch) => {        
+        dispatch(doSetLoadingProgress(100))
+        dispatch(doAppendRealEstatePosts(posts))
+    }
+}
+
 const SET_POSTS = 'SET_POSTS'
 function doSetRealEstatePosts(posts){
     console.log("doSetRealEstatePosts", posts)
     return {
         type: SET_POSTS,
+        posts
+    };
+}
+
+const APPEND_POSTS = 'APPEND_POSTS'
+function doAppendRealEstatePosts(posts){
+    console.log("doAppendRealEstatePosts", posts)
+    return {
+        type: APPEND_POSTS,
         posts
     };
 }
@@ -80,6 +104,18 @@ const RealEstateReducers = {
         console.log("RealEstateReducers.posts", action)
         if(action.type === SET_POSTS){
             return action.posts
+        }
+        return state
+    },
+
+    appendPosts: function(state = [], action){
+        console.log("RealEstateReducers.appendPosts", action)
+        if(action.type === APPEND_POSTS){
+            if(state.posts){
+                return state.posts.concat(action.posts)
+            }else{
+                return action.posts
+            }
         }
         return state
     },

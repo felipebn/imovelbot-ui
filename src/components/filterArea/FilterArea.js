@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { startSearch } from '../../state/store';
 import LocationDropdown from './LocationDropdown'
 import './FilterArea.css';
 
@@ -112,9 +114,9 @@ class FilterArea extends Component {
 
   renderSearchButton(){
     return(<div className="field searchButton">      
-      <a class="button">
-        <span class="icon">
-          <i class="fa fa-search"></i>
+      <a className="button" onClick={this.props.startSearch}>
+        <span className="icon">
+          <i className="fa fa-search"></i>
         </span>
         <span>Search</span>
       </a>
@@ -123,4 +125,15 @@ class FilterArea extends Component {
 
 }
 
-export default FilterArea;
+const mapStateToProps = (state, ownProps) => {
+  return {
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    startSearch: () => dispatch(startSearch()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FilterArea);
