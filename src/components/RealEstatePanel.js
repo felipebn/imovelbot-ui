@@ -17,7 +17,7 @@ class RealEstatePanel extends Component {
   }
 
   componentDidMount(){
-    if(this.props.post == null){
+    if(this.props.match.params.id){
       this.props.fetchRealEstatePost(this.props.match.params.id);                                                                                                                                                                                                                                                                                                                                                                                                                                                        
     }
     //Clip body: see this for improvement: https://jaketrent.com/post/update-body-class-react/
@@ -42,7 +42,7 @@ class RealEstatePanel extends Component {
                     <div className="columns">
                       <div className="column">
                         <h3 className="title">
-                          <Link to="/" onClick={this.handleBackToListingClick} className="realEstatePanel-backlink"><i className="fa fa-angle-double-left fa-1x"></i></Link>
+                          <Link to={"/"} onClick={this.handleBackToListingClick} className="realEstatePanel-backlink"><i className="fa fa-angle-double-left fa-1x"></i></Link>
                           {post.title}
                         </h3>
                       </div>
@@ -72,7 +72,7 @@ class RealEstatePanel extends Component {
   }
 
   handleBackToListingClick(){
-    this.props.fetchRealEstateListing();
+    this.props.fetchRealEstateListing()
   }
 
   renderAttributeTags(){

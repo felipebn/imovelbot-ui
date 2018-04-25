@@ -5,7 +5,10 @@ import {
 const API_URL = 'http://localhost:9090'
 
 export function fetchRealEstateListing(){
-    return (dispatch) => {
+    return (dispatch, getState) => {
+        var listIsAlreadyFetch = getState().posts.length > 0
+        if(listIsAlreadyFetch) return;
+            
         var url = `${API_URL}/realEstate?page=0`
         dispatch(doSetLoadingProgress(0))
         fetch(url)
