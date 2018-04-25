@@ -1,7 +1,7 @@
 section.realEstatePanel-section.hero.is-fullheight{
     align-items: start;
-    max-height: calc(-57px + 100vh);
-    min-height: calc(-57px + 100vh);
+    max-height: calc(-52px - 56px + 100vh);
+    min-height: calc(-52px - 56px + 100vh);
 }
 div.realEstatePanel-container{
     width: 100%;
@@ -10,7 +10,11 @@ div.realEstatePanel-container{
 }
 
 div.realEstatePanel-container .title{
-    font-size: 1.75rem;
+    font-size: 1.50rem;
+}
+div.realEstatePanel-container .price{
+    font-size: 1.55rem;
+    font-weight: normal;
 }
 
 a.realEstatePanel-backlink{
@@ -18,3 +22,19 @@ a.realEstatePanel-backlink{
     color: #3423A6;
 }
 
+div.realEstatePanel-container .postDescription{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+div.realEstatePanel-container .details{
+    flex: 1;
+}
+
+div.realEstatePanel-container .description{
+    font-size: 12px;
+    flex: 3;
+    overflow-y: auto;
+    margin-top: 5px;
+}

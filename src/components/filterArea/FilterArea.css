@@ -2,6 +2,10 @@
 
 }
 
+.navbar.filterArea > .navbar-item{
+    padding-bottom: 0px;
+}
+
 .navbar.filterArea .field:not(:last-child) {
     margin-right: 10px;
 }

@@ -35,27 +35,32 @@ class RealEstatePanel extends Component {
       <section className="hero is-fullheight realEstatePanel-section">
         <div className="hero-body" style={{paddingTop:'10px', width:'100%'}}>          
           <div className="realEstatePanel-container">
-            <div className="columns" style={{height:'70vh'}}>
+            <div className="columns" style={{height:'64vh'}}>
               <div className="column">
-                <div className="columns">
-                  <div className="column">
-                    <h3 className="title">
-                      <Link to="/" onClick={this.handleBackToListingClick} className="realEstatePanel-backlink"><i className="fa fa-angle-double-left fa-1x"></i></Link>
-                      {post.title}
-                    </h3>
+                <div className="postDescription">
+                  <div className="details">
+                    <div className="columns">
+                      <div className="column">
+                        <h3 className="title">
+                          <Link to="/" onClick={this.handleBackToListingClick} className="realEstatePanel-backlink"><i className="fa fa-angle-double-left fa-1x"></i></Link>
+                          {post.title}
+                        </h3>
+                      </div>
+                      <div className="column is-one-quarter has-text-right is-size-3">
+                        <h3 className="title price">{post.price} &euro;</h3>
+                      </div>
+                    </div>
+                    <div className="field is-grouped is-grouped-multiline">
+                    {this.renderAttributeTags()}
+                    </div>
                   </div>
-                  <div className="column is-one-quarter has-text-right is-size-3">
-                    <h3>{post.price} &euro;</h3>
-                  </div>
+                  <p className="description">
+                    {post.description}
+                    {post.description}
+                  </p>
                 </div>
-                <div className="field is-grouped is-grouped-multiline">
-                {this.renderAttributeTags()}
-                </div>
-                <p>
-                  {post.description}
-                </p>
               </div>
-              <div className="column is-three-fifths has-text-centered">
+              <div className="column is-half has-text-centered">
                 <img src={this.state.currentPhotoUrl || post.mainPhotoUrl} alt="House" style={{maxHeight:'100%', objectFit:'scale-down'}}/>
               </div>
             </div>

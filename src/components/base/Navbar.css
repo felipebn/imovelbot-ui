@@ -7,7 +7,8 @@
 
 .navbar.mainNavBar .navbar-brand{
     font-family: 'Poiret One', cursive;
-    font-size: 24px;
+    font-size: 20px;
+    min-height: 2rem;
 }
 
 .navbar.mainNavBar .navbar-item{
