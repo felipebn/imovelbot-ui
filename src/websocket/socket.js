@@ -27,10 +27,10 @@ export const setupListeners = (store) => {
 }
 
 export const socket = {
-    startSearch(filters){
+    startSearch(filters = {}){
         const searchMessage = {
             clientId,
-            "priceRange": {"min": 100, "max": 1000}                                                             
+            ...filters
         }
         client.send('/ws/search/start', {}, JSON.stringify(searchMessage));
     },

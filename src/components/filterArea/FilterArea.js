@@ -5,6 +5,20 @@ import LocationDropdown from './LocationDropdown'
 import './FilterArea.css';
 
 class FilterArea extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      "businessType": "BUY",
+      "location": null,
+      "propertyType": "House",
+      "priceRange":{min: null, max: null},
+      "areaRange":{min: null, max: null} ,
+      "bedroomRange":{min: null, max: null}   
+    }
+    this.handleSearchButtonClick = this.handleSearchButtonClick.bind(this)
+    this.handleInputChangeEvent = this.handleInputChangeEvent.bind(this)
+  }
+
   render(){
     return (
       <nav className="navbar filterArea has-shadow" aria-label="main navigation">
@@ -64,13 +78,13 @@ class FilterArea extends Component {
   renderPriceRangeFilter(){
     return(<div className="field has-addons compactFilter">
       <div className="control has-icons-left">
-        <input className="input" type="text" placeholder="Min"/>
+        <input className="input" type="text" placeholder="Min" onInput={this.handleInputChangeEvent} name="priceRange" propertyname="min"/>
         <span className="icon is-small is-left">
           <i className="fa fa-eur"></i>
         </span>
       </div>
       <div className="control has-icons-left">
-        <input className="input" type="text" placeholder="Max"/>
+        <input className="input" type="text" placeholder="Max" onInput={this.handleInputChangeEvent} name="priceRange" propertyname="max"/>
         <span className="icon is-small is-left">
           <i className="fa fa-eur"></i>
         </span>
@@ -114,7 +128,7 @@ class FilterArea extends Component {
 
   renderSearchButton(){
     return(<div className="field searchButton">      
-      <a className="button" onClick={this.props.startSearch}>
+      <a className="button" onClick={this.handleSearchButtonClick}>
         <span className="icon">
           <i className="fa fa-search"></i>
         </span>
@@ -123,17 +137,36 @@ class FilterArea extends Component {
     </div>)
   }
 
+  handleSearchButtonClick(){
+    this.props.startSearch()
+  }
+
+  handleInputChangeEvent(e){
+    //TODO add event handler to input fields, 
+    var inputName = e.currentTarget.name
+    var filterPropName = e.currentTarget.getAttribute("propertyname")
+    console.log("Input changed", inputName, filterPropName)
+    var stateUpdate = {}
+    if(filterPropName){
+      stateUpdate[inputName] = {}
+      stateUpdate[inputName][filterPropName] = e.currentTarget.value
+    }else{
+      stateUpdate[inputName] = e.value
+    }
+    this.setState(stateUpdate)
+  }
+
 }
 
 const mapStateToProps = (state, ownProps) => {
   return {
-  };
-};
+  }
+}
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    startSearch: () => dispatch(startSearch()),
-  };
-};
+    startSearch: (filters) => dispatch(startSearch(filters)),
+  }
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(FilterArea);
+export default connect(mapStateToProps, mapDispatchToProps)(FilterArea)

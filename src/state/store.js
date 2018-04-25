@@ -43,11 +43,10 @@ export function fetchRealEstatePost(postId, updatePageTitle){
     }
 }
 
-export function startSearch(){
+export function startSearch(filters = {}){
     return (dispatch, getState, {socket}) => {        
         dispatch(doSetLoadingProgress(0))
-        //TODO setup the filter
-        socket.startSearch({})
+        socket.startSearch(filters)
     }
 }
 
