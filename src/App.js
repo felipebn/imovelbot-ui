@@ -5,9 +5,9 @@ import Navbar from './components/base/Navbar';
 import Listing from './components/Listing';
 import RealEstatePanel from './components/RealEstatePanel';
 import FilterArea from './components/filterArea/FilterArea';
-import { Switch, Route } from 'react-router-dom'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import { connect } from 'react-redux';
-
+//          <!--Route path='/realEstate/:id' render={(props) => this.renderWithTitle(<RealEstatePanel postId={props.match.params.id}/>)}/ -->
 class App extends Component {
   render() {
     return (
@@ -15,10 +15,12 @@ class App extends Component {
         <Navbar/>
         <FilterArea/>
         <Progress percent={this.props.loadingProgress} height="4"/>
-        <Switch>
-          <Route exact path='/' render={(props) => this.renderWithTitle(<Listing/>)}/>
-          <Route path='/realEstate/:id' render={(props) => this.renderWithTitle(<RealEstatePanel postId={props.match.params.id}/>)}/>
-        </Switch>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path='/' component={Listing}/>
+            <Route path='/realEstate/:id' component={RealEstatePanel}/>
+          </Switch>
+        </BrowserRouter>
       </div>
     );
   }

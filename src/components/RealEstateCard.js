@@ -23,7 +23,7 @@ class RealEstateCard extends Component {
     return(
       <div className="card-image">
         <figure className="image is-4by3">
-          <Link to={"/realEstate/" + this.props.postId} onClick={this.handlePostClick}>
+          <Link to={"/realEstate/" + this.props.postId} >
             <img className="realEstateCard-thumbnail" src={this.getMainPhotoUrl()} alt="House"/>
           </Link>
         </figure>

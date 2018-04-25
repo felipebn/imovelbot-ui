@@ -18,15 +18,10 @@ class RealEstatePanel extends Component {
 
   componentDidMount(){
     if(this.props.post == null){
-      this.props.fetchRealEstatePost(this.props.postId);
+      this.props.fetchRealEstatePost(this.props.match.params.id);                                                                                                                                                                                                                                                                                                                                                                                                                                                        
     }
     //Clip body: see this for improvement: https://jaketrent.com/post/update-body-class-react/
     document.body.classList.add("is-clipped")
-  }
-
-  componentWillReceiveProps(){
-    if(this.props.post)
-      document.title = this.props.post.title;
   }
 
   getPost(){
@@ -35,7 +30,7 @@ class RealEstatePanel extends Component {
 
   render() {
     var post = this.getPost()
-    if(post == null) return null;
+    if(post == null) return null
     return (
       <section className="hero is-fullheight realEstatePanel-section">
         <div className="hero-body" style={{paddingTop:'10px', width:'100%'}}>          

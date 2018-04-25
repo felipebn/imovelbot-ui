@@ -19,18 +19,24 @@ export function fetchRealEstateListing(){
 }
 
 export function fetchRealEstatePost(postId, updatePageTitle){
-    return (dispatch) => {
-        var url = `${API_URL}/realEstateProperty/${postId}`
-        dispatch(doSetLoadingProgress(0))
-        fetch(url)
-            .then(response => response.json())
-            .then(post => {
-                console.log("Loaded post", post) 
-                dispatch(doSetCurrentPost(post))
-                if( updatePageTitle )
-                    dispatch(doSetTitle(post.title))
-                dispatch(doSetLoadingProgress(100))
-            })
+    return (dispatch, getState) => {
+        var posts = getState().posts
+        if(getState().posts.length > 0){
+            var loadedPost = posts.filter(p => p.id === postId)[0]
+            dispatch(doSetCurrentPost(loadedPost))
+        }else{
+            var url = `${API_URL}/realEstateProperty/${postId}`
+            dispatch(doSetLoadingProgress(0))
+            fetch(url)
+                .then(response => response.json())
+                .then(post => {
+                    console.log("Loaded post", post) 
+                    dispatch(doSetCurrentPost(post))
+                    if( updatePageTitle )
+                        dispatch(doSetTitle(post.title))
+                    dispatch(doSetLoadingProgress(100))
+                })
+        }
     }
 }
 
@@ -49,6 +55,8 @@ export function appendPosts(posts){
         dispatch(doSetLoadingProgress(100))
     }
 }
+
+//Internal api---------------------------------------------------------------------
 
 const SET_POSTS = 'SET_POSTS'
 function doSetRealEstatePosts(posts){
