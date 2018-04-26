@@ -142,7 +142,6 @@ class FilterArea extends Component {
   }
 
   handleInputChangeEvent(e){
-    //TODO add event handler to input fields, 
     var inputName = e.currentTarget.name
     var filterPropName = e.currentTarget.getAttribute("propertyname")
     console.log("Input changed", inputName, filterPropName, e.currentTarget.value)
