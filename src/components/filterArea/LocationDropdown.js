@@ -20,37 +20,42 @@ class LocationDropdown extends Component {
     //TODO build a places db or hardcode it
     var places = [
       {
+        "id": 1,
         "name": "Lisbon",
         "cities":[
           {
+            "id": 2,
             "name": "Lisbon",
             "parishes": [
-              {"name":"Ajuda"},
-              {"name":"Alcantara"},
-              {"name":"Alvalade"},
-              {"name":"Areeiro"}
+              {"id": 3,"name":"Ajuda"},
+              {"id": 4,"name":"Alcantara"},
+              {"id": 5,"name":"Alvalade"},
+              {"id": 6,"name":"Areeiro"}
             ]
           },
           {
+            "id": 7,
             "name": "Cascais",
             "parishes": [
-              {"name":"Alcabideche"},
-              {"name":"Carcavelos e Parede"},
-              {"name":"Cascais e Estoril"},
-              {"name":"São Domingos de Rana"}
+              {"id": 8,"name":"Alcabideche"},
+              {"id": 9,"name":"Carcavelos e Parede"},
+              {"id": 10,"name":"Cascais e Estoril"},
+              {"id": 11,"name":"São Domingos de Rana"}
             ]
           }
         ]
       },
       {
+        "id": 12,
         "name": "Porto",
         "cities":[
           {
+            "id": 13,
             "name": "Porto",
             "parishes": [
-              {"name":"Paranhos"},
-              {"name":"Bonfim"},
-              {"name":"Cedofeita"}
+              {"id": 15,"name":"Paranhos"},
+              {"id": 16,"name":"Bonfim"},
+              {"id": 17,"name":"Cedofeita"}
             ]
           }
         ]
@@ -133,7 +138,7 @@ class LocationDropdown extends Component {
     </span>
     ) : null;
     const selectedClass = this.isDistrictOrCitySelected(locationData) ? "selected" : "";
-    return (<a href="#" className={"dropdown-item " + selectedClass} onClick={() => onSelectCallback(locationData)}>
+    return (<a key={locationData.id} href="#" className={"dropdown-item " + selectedClass} onClick={() => onSelectCallback(locationData)}>
       {locationData.name} 
       {angleIcon}
     </a>)

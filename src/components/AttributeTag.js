@@ -4,7 +4,7 @@ import './AttributeTag.css';
 class AttributeTag extends Component {
   render(){
       var infos = Array.isArray(this.props.infos) ? this.props.infos : [this.props.infos]
-      var infoTags = infos.map(text => <span className="tag value is-success">{this.renderTagValue(text)}</span>)
+      var infoTags = infos.map(text => <span key={text} className="tag value is-success">{this.renderTagValue(text)}</span>)
       return (
         <div className="control attributeTag">
             <div className="tags has-addons">

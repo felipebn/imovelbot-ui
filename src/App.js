@@ -26,6 +26,7 @@ class App extends Component {
   }
 
   renderWithTitle(component){
+    console.log("rendering panel...")
     document.title = this.props.pageTitle;
     return component;
   }

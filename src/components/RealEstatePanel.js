@@ -29,6 +29,7 @@ class RealEstatePanel extends Component {
   }
 
   render() {
+    document.title = this.props.pageTitle;
     var post = this.getPost()
     if(post == null) return null
     return (
@@ -79,9 +80,10 @@ class RealEstatePanel extends Component {
     var expectedAttributes = [
       "type", "size", "bathrooms", "furnished"
     ];
+    var tagCount = 0
     return expectedAttributes
       .filter(prop => this.getPost()[prop] != null)
-      .map(prop => (<AttributeTag type={prop} infos={this.getPost()[prop]}/>))
+      .map(prop => (<AttributeTag key={tagCount++} type={prop} infos={this.getPost()[prop]}/>))
   }
 
   handleChangePhoto(photoUrl){
@@ -91,10 +93,9 @@ class RealEstatePanel extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  console.log("Mapping state to RealEstatePanel.props", state)
-  console.log("RealEstatePanel.props ownProps", ownProps)
   return {
     post: state.currentPost,
+    pageTitle: state.pageTitle
   };
 };
 

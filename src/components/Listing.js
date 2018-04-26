@@ -13,6 +13,7 @@ class Listing extends Component {
   }
 
   render() {
+    document.title = this.props.pageTitle;
     var columns = (this.props.posts || []).map(post => this.renderColumn(post))
     return (
       <div className="listing-container">
@@ -40,6 +41,7 @@ const mapStateToProps = (state) => {
   console.log("Mapping state to Listing.props", state)
   return {
     posts: state.posts,
+    pageTitle: state.pageTitle
   };
 };
 

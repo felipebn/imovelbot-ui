@@ -6,6 +6,8 @@ const API_URL = 'http://localhost:9090'
 
 export function fetchRealEstateListing(){
     return (dispatch, getState) => {
+        dispatch(doSetTitle())
+
         var listIsAlreadyFetch = getState().posts.length > 0
         if(listIsAlreadyFetch) return;
             
@@ -24,21 +26,22 @@ export function fetchRealEstateListing(){
 export function fetchRealEstatePost(postId, updatePageTitle){
     return (dispatch, getState) => {
         var posts = getState().posts
+        var updateFn = post => {
+            console.log("Loaded post", post) 
+            dispatch(doSetCurrentPost(post))
+            if( updatePageTitle )
+                dispatch(doSetTitle(post.title))
+            dispatch(doSetLoadingProgress(100))
+        }; 
         if(getState().posts.length > 0){
             var loadedPost = posts.filter(p => p.id === postId)[0]
-            dispatch(doSetCurrentPost(loadedPost))
+            updateFn(loadedPost)
         }else{
             var url = `${API_URL}/realEstateProperty/${postId}`
             dispatch(doSetLoadingProgress(0))
             fetch(url)
                 .then(response => response.json())
-                .then(post => {
-                    console.log("Loaded post", post) 
-                    dispatch(doSetCurrentPost(post))
-                    if( updatePageTitle )
-                        dispatch(doSetTitle(post.title))
-                    dispatch(doSetLoadingProgress(100))
-                })
+                .then(updateFn)
         }
     }
 }
@@ -95,6 +98,12 @@ function doSetLoadingProgress(progress){
 
 const SET_PAGE_TITLE = 'SET_TITLE'
 export function doSetTitle(titleSuffix){
+    if(titleSuffix == null){
+        return {
+            type: SET_PAGE_TITLE,
+            title: `movingbot`
+        };        
+    } 
     return {
         type: SET_PAGE_TITLE,
         title: `movingbot | ${titleSuffix}`
@@ -112,7 +121,6 @@ const RealEstateReducers = {
     },
 
     posts: function(state = [], action){
-        console.log("RealEstateReducers.posts", action)
         if(action.type === SET_POSTS){
             return action.posts
         }
@@ -130,6 +138,7 @@ const RealEstateReducers = {
     },
 
     pageTitle: function(state = "movingbot", action){
+        console.log("RealEstateReducers.pagetitle", action)
         if(action.type === SET_PAGE_TITLE){
             return action.title
         }
