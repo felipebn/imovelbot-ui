@@ -47,9 +47,9 @@ class FilterArea extends Component {
     return(<div className="field">
       <div className="control">
         <div className="select">
-          <select>
-            <option>To buy</option>
-            <option>To rent</option>
+          <select onInput={this.handleInputChangeEvent} name="businessType">
+            <option value="BUY">To buy</option>
+            <option value="RENT">To rent</option>
           </select>
         </div>
       </div>
@@ -61,7 +61,7 @@ class FilterArea extends Component {
     return(<div className="field is-horizontal">
       <div className="control">
         <div className="select">
-          <select>
+          <select onInput={this.handleInputChangeEvent} name="location">
             <option>House</option>
             <option>Detached House</option>
             <option>Apartment</option>
@@ -95,13 +95,13 @@ class FilterArea extends Component {
   renderAreaRangeFilter(){
     return(<div className="field has-addons compactFilter">
       <div className="control has-icons-left">
-        <input className="input" type="text" placeholder="Min"/>
+        <input className="input" type="text" placeholder="Min" onInput={this.handleInputChangeEvent} name="areaRange" propertyname="min"/>
         <span className="icon is-small is-left">
           <i className="fa fa-arrows"></i>
         </span>
       </div>
       <div className="control has-icons-left">
-        <input className="input" type="text" placeholder="Max"/>
+        <input className="input" type="text" placeholder="Max" onInput={this.handleInputChangeEvent} name="areaRange" propertyname="max"/>
         <span className="icon is-small is-left">
           <i className="fa fa-arrows"></i>
         </span>
@@ -112,13 +112,13 @@ class FilterArea extends Component {
   renderRoomRangeFilter(){
     return(<div className="field has-addons compactFilter">
       <div className="control has-icons-left">
-        <input className="input" type="text" placeholder="Min"/>
+        <input className="input" type="text" placeholder="Min" onInput={this.handleInputChangeEvent} name="bedroomRange" propertyname="min"/>
         <span className="icon is-small is-left">
           <i className="fa fa-bed"></i>
         </span>
       </div>
       <div className="control has-icons-left">
-        <input className="input" type="text" placeholder="Max"/>
+        <input className="input" type="text" placeholder="Max" onInput={this.handleInputChangeEvent} name="bedroomRange" propertyname="max"/>
         <span className="icon is-small is-left">
           <i className="fa fa-bed"></i>
         </span>
@@ -145,13 +145,13 @@ class FilterArea extends Component {
     //TODO add event handler to input fields, 
     var inputName = e.currentTarget.name
     var filterPropName = e.currentTarget.getAttribute("propertyname")
-    console.log("Input changed", inputName, filterPropName)
+    console.log("Input changed", inputName, filterPropName, e.currentTarget.value)
     var stateUpdate = {}
     if(filterPropName){
       stateUpdate[inputName] = {}
       stateUpdate[inputName][filterPropName] = e.currentTarget.value
     }else{
-      stateUpdate[inputName] = e.value
+      stateUpdate[inputName] = e.currentTarget.value
     }
     this.setState(stateUpdate)
   }
