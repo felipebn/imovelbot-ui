@@ -5,16 +5,26 @@ import RealEstateCard from './RealEstateCard';
 import './Listing.css';
 
 class Listing extends Component {
+  constructor(props){
+    super(props)
+    this.lastPostRef = React.createRef();
+    this.handleScroll = this.handleScroll.bind(this)
+  }
 
   componentDidMount(){
-    
+    window.addEventListener('scroll', this.handleScroll);
     //Unclip body
     document.body.classList.remove("is-clipped")
   }
 
+  componentWillMount(){
+    window.removeEventListener('scroll', this.handleScroll);
+  }
+
   render() {
     document.title = this.props.pageTitle;
-    var columns = (this.props.posts || []).map(post => this.renderColumn(post))
+    var index = 0
+    var columns = (this.props.posts || []).map(post => this.renderPost(index++, post))
     return (
       <div className="listing-container">
         <div className="columns is-multiline">
@@ -24,7 +34,7 @@ class Listing extends Component {
     );
   }
 
-  renderColumn(post){
+  renderPost(index, post){
     return (<div className="column is-one-quarter-desktop is-half-tablet" key={post.id}>
       <RealEstateCard 
         title={post.title}
@@ -34,6 +44,11 @@ class Listing extends Component {
         lastUpdated={post.lastUpdated}
         postId={post.id}/>
     </div>);
+  }
+
+  handleScroll(){
+    console.log("page scroll..", window.scrollY, window.innerHeight)
+    console.log("last post ref", this.lastPostRef.offsetTop)
   }
 }
 
