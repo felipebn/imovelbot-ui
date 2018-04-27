@@ -2,6 +2,8 @@ import {
     combineReducers,
 } from 'redux'
 
+const POST_COUNT_PAUSE_TRIGGER = 30
+const RESULT_SIZE = 15
 const API_URL = 'http://localhost:9090'
 
 export function fetchRealEstateListing(){
@@ -49,15 +51,28 @@ export function fetchRealEstatePost(postId, updatePageTitle){
 export function startSearch(filters = {}){
     return (dispatch, getState, {socket}) => {        
         dispatch(doSetLoadingProgress(0))
-        socket.startSearch(filters)
+        socket.startSearch(RESULT_SIZE, filters)
+    }
+}
+
+export function resumeSearch(){
+    return (dispatch, getState, {socket}) => {        
+        console.log("resuming search...")
+        dispatch(doSetLoadingProgress(0))
+        socket.resumeSearch()
     }
 }
 
 export function appendPosts(posts){
-    return (dispatch) => {        
+    return (dispatch, getState, {socket}) => {        
+        var currentPostCount = getState().posts.length
+
         dispatch(doSetLoadingProgress(50))
         dispatch(doAppendRealEstatePosts(posts))
         dispatch(doSetLoadingProgress(100))
+
+        if((currentPostCount + posts.length) >= POST_COUNT_PAUSE_TRIGGER)
+            socket.pauseSearch()
     }
 }
 
