@@ -51,6 +51,7 @@ export function fetchRealEstatePost(postId, updatePageTitle){
 export function startSearch(filters = {}){
     return (dispatch, getState, {socket}) => {        
         dispatch(doSetLoadingProgress(0))
+        dispatch(setSearchPauseState(false))
         socket.startSearch(RESULT_SIZE, filters)
     }
 }
@@ -60,6 +61,7 @@ export function resumeSearch(){
         console.log("resuming search...")
         dispatch(doSetLoadingProgress(0))
         socket.resumeSearch()
+        dispatch(setSearchPauseState(false))
     }
 }
 
@@ -67,15 +69,31 @@ export function appendPosts(posts){
     return (dispatch, getState, {socket}) => {        
         var currentPostCount = getState().posts.length
 
+        if((currentPostCount + posts.length) >= POST_COUNT_PAUSE_TRIGGER){
+            socket.pauseSearch()
+            dispatch(setSearchPauseState(true))
+            console.log("Paused search")
+        }
+        
         dispatch(doSetLoadingProgress(50))
         dispatch(doAppendRealEstatePosts(posts))
         dispatch(doSetLoadingProgress(100))
-
-        if((currentPostCount + posts.length) >= POST_COUNT_PAUSE_TRIGGER)
-            socket.pauseSearch()
     }
 }
 
+const SET_PAGE_TITLE = 'SET_TITLE'
+export function doSetTitle(titleSuffix){
+    if(titleSuffix == null){
+        return {
+            type: SET_PAGE_TITLE,
+            title: `movingbot`
+        };        
+    } 
+    return {
+        type: SET_PAGE_TITLE,
+        title: `movingbot | ${titleSuffix}`
+    };
+}
 //Internal api---------------------------------------------------------------------
 
 const SET_POSTS = 'SET_POSTS'
@@ -111,18 +129,12 @@ function doSetLoadingProgress(progress){
     };
 }
 
-const SET_PAGE_TITLE = 'SET_TITLE'
-export function doSetTitle(titleSuffix){
-    if(titleSuffix == null){
-        return {
-            type: SET_PAGE_TITLE,
-            title: `movingbot`
-        };        
-    } 
+const SET_SEARCH_STATE = 'SET_SEARCH_STATE'
+function setSearchPauseState(isPaused){
     return {
-        type: SET_PAGE_TITLE,
-        title: `movingbot | ${titleSuffix}`
-    };
+        type: SET_SEARCH_STATE,
+        isPaused
+    }
 }
 
 //----REDUCERS-----------------------------------------------------------------------
@@ -156,6 +168,13 @@ const RealEstateReducers = {
         console.log("RealEstateReducers.pagetitle", action)
         if(action.type === SET_PAGE_TITLE){
             return action.title
+        }
+        return state;
+    },
+
+    isSearchPaused: function(state=false, action){
+        if(action.type === SET_SEARCH_STATE){
+            return action.isPaused
         }
         return state;
     }

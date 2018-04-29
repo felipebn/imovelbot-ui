@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchRealEstateListing, doSetTitle } from '../state/store';
+import { fetchRealEstateListing, doSetTitle, resumeSearch } from '../state/store';
 import RealEstateCard from './RealEstateCard';
 import './Listing.css';
 
 class Listing extends Component {
   constructor(props){
     super(props)
-    this.lastPostRef = React.createRef();
     this.handleScroll = this.handleScroll.bind(this)
   }
 
@@ -23,8 +22,9 @@ class Listing extends Component {
 
   render() {
     document.title = this.props.pageTitle;
-    var index = 0
-    var columns = (this.props.posts || []).map(post => this.renderPost(index++, post))
+    var posts = this.props.posts || []
+    var columns = posts.map(post => this.renderPost(post))
+
     return (
       <div className="listing-container">
         <div className="columns is-multiline">
@@ -34,7 +34,7 @@ class Listing extends Component {
     );
   }
 
-  renderPost(index, post){
+  renderPost(post){
     return (<div className="column is-one-quarter-desktop is-half-tablet" key={post.id}>
       <RealEstateCard 
         title={post.title}
@@ -46,9 +46,19 @@ class Listing extends Component {
     </div>);
   }
 
+  getWindowMaxScroll(){
+    return Math.max( document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight ) 
+              - window.innerHeight;
+  }
+
   handleScroll(){
-    console.log("page scroll..", window.scrollY, window.innerHeight)
-    console.log("last post ref", this.lastPostRef.offsetTop)
+    if(this.props.isSearchPaused){
+      console.log("page scroll..", window.scrollY)
+      var currentMax = this.getWindowMaxScroll()
+      if(window.scrollY/currentMax > 0.85){
+        this.props.resumeSearch();
+      }
+    }
   }
 }
 
@@ -56,7 +66,8 @@ const mapStateToProps = (state) => {
   console.log("Mapping state to Listing.props", state)
   return {
     posts: state.posts,
-    pageTitle: state.pageTitle
+    pageTitle: state.pageTitle,
+    isSearchPaused: state.isSearchPaused
   };
 };
 
@@ -65,6 +76,10 @@ const mapDispatchToProps = (dispatch) => {
     fetchListing: () => {
       dispatch(fetchRealEstateListing());
       dispatch(doSetTitle("Listing"));
+    },
+
+    resumeSearch: () => {
+      dispatch(resumeSearch())
     }
   };
 };
